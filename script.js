@@ -480,8 +480,8 @@ document.querySelectorAll(".lang-btn").forEach((btn) => {
 });
 
 /* ═══════════════════════════════════════════
-   NAVBAR SCROLL
-═══════════════════════════════════════════ */
+         NAVBAR SCROLL
+      ═══════════════════════════════════════════ */
 const nav = document.getElementById("mainNav");
 window.addEventListener(
   "scroll",
@@ -495,8 +495,8 @@ window.addEventListener(
 );
 
 /* ═══════════════════════════════════════════
-   SCROLL TO TOP
-═══════════════════════════════════════════ */
+         SCROLL TO TOP
+      ═══════════════════════════════════════════ */
 document
   .getElementById("scrollTop")
   .addEventListener("click", () =>
@@ -504,8 +504,8 @@ document
   );
 
 /* ═══════════════════════════════════════════
-   REVEAL ON SCROLL
-═══════════════════════════════════════════ */
+         REVEAL ON SCROLL
+      ═══════════════════════════════════════════ */
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
@@ -517,24 +517,22 @@ const revealObserver = new IntersectionObserver(
   },
   { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
 );
-
 document
   .querySelectorAll(".reveal")
   .forEach((el) => revealObserver.observe(el));
 
 /* ═══════════════════════════════════════════
-   HERO LOAD ANIMATION
-═══════════════════════════════════════════ */
+         HERO LOAD ANIMATION
+      ═══════════════════════════════════════════ */
 window.addEventListener("load", () => {
   document.querySelectorAll("#hero .reveal").forEach((el) => {
-    // Trigger immediately for hero
     setTimeout(() => el.classList.add("visible"), 100);
   });
 });
 
 /* ═══════════════════════════════════════════
-   ACTIVE NAV HIGHLIGHT
-═══════════════════════════════════════════ */
+         ACTIVE NAV HIGHLIGHT
+      ═══════════════════════════════════════════ */
 const navLinks = document.querySelectorAll(
   ".navbar-nav .nav-link:not(.btn-nav-cta)",
 );
@@ -555,3 +553,14 @@ window.addEventListener(
   },
   { passive: true },
 );
+
+/* ═══════════════════════════════════════════
+         CLOSE MENU ON NAV LINK CLICK (mobile)
+      ═══════════════════════════════════════════ */
+document.querySelectorAll("#navMenu .nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const collapse = document.getElementById("navMenu");
+    const bsCollapse = bootstrap.Collapse.getInstance(collapse);
+    if (bsCollapse) bsCollapse.hide();
+  });
+});
