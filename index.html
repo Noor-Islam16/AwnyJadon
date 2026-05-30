@@ -30,38 +30,26 @@
          ROOT TOKENS — BRIGHT & VIVID PALETTE
       ═══════════════════════════════════════════════ */
       :root {
-        /* Backgrounds — clean, bright, airy */
         --bg: #ffffff;
         --bg2: #f4f6ff;
         --bg3: #eef1ff;
         --parchment: #f9faff;
-
-        /* Primary: rich royal blue (trustworthy, ministerial) */
         --primary: #1a3fa8;
         --primary-mid: #2451cc;
         --primary-light: #4a72e8;
         --primary-pale: #dce6ff;
         --primary-glow: rgba(26, 63, 168, 0.18);
-
-        /* Accent: vivid amber-gold (faith, warmth) */
         --gold: #e6920a;
         --gold-bright: #f5a623;
         --gold-pale: #fde9b8;
         --gold-glow: rgba(230, 146, 10, 0.22);
-
-        /* Accent 2: vibrant teal (life, growth) */
         --teal: #0891b2;
         --teal-light: #22d3ee;
-
-        /* Text */
         --ink: #0d1b3e;
         --ink-soft: #253668;
         --muted: #5a6a9a;
-
-        /* Borders */
         --border: rgba(26, 63, 168, 0.15);
         --border-soft: rgba(26, 63, 168, 0.1);
-
         --white: #ffffff;
         --radius: 16px;
         --radius-lg: 24px;
@@ -264,17 +252,63 @@
         color: #fff !important;
       }
 
+      /* ── TOGGLER — custom icon that swaps between hamburger & × ── */
       .navbar-toggler {
         border: 1.5px solid var(--primary);
         border-radius: 8px;
         padding: 6px 10px;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        transition: background 0.2s;
       }
-      .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231a3fa8' stroke-linecap='round' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
       }
+      .navbar-toggler:hover {
+        background: rgba(26, 63, 168, 0.06);
+      }
+
+      /* Hamburger icon (default) */
+      .toggler-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 18px;
+      }
+      .toggler-icon span {
+        display: block;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        transform-origin: center;
+      }
+
+      /* Animate into × when menu is open */
+      .navbar-toggler[aria-expanded="true"] .toggler-icon span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .navbar-toggler[aria-expanded="true"] .toggler-icon span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .navbar-toggler[aria-expanded="true"] .toggler-icon span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      /* ── Mobile collapse — NO shadow ── */
       .navbar-collapse {
         background: rgba(255, 255, 255, 0.98);
         border-top: 1px solid var(--border);
+        /* shadow REMOVED */
         padding: 8px 16px 16px;
         margin: 0 -12px;
       }
@@ -304,7 +338,7 @@
       }
 
       /* ═══════════════════════════════════════════════
-         HERO — text top, image below on mobile
+         HERO
       ═══════════════════════════════════════════════ */
       #hero {
         min-height: 100vh;
@@ -322,7 +356,6 @@
         padding-bottom: 60px;
         width: 100%;
       }
-      /* vivid accent circles */
       #hero::before {
         content: "";
         position: absolute;
@@ -345,7 +378,6 @@
             transparent 40%
           );
       }
-      /* subtle grid overlay */
       #hero::after {
         content: "";
         position: absolute;
@@ -468,7 +500,6 @@
         background: rgba(230, 146, 10, 0.1);
       }
 
-      /* ── hero image card sits BELOW text on mobile ── */
       .hero-card {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(12px);
@@ -499,7 +530,6 @@
         object-position: top center;
         display: block;
         border: 1px solid rgba(255, 255, 255, 0.15);
-        /* Full image — no fixed height on mobile */
         height: auto;
         max-height: 480px;
       }
@@ -850,7 +880,7 @@
       }
 
       /* ═══════════════════════════════════════════════
-         CHALLENGES — image AFTER heading text on mobile
+         CHALLENGES
       ═══════════════════════════════════════════════ */
       #challenges {
         background: linear-gradient(
@@ -947,7 +977,6 @@
         margin: 0;
       }
 
-      /* Full image — no fixed height clipping */
       .ch-img {
         width: 100%;
         height: auto;
@@ -957,7 +986,7 @@
       }
 
       /* ═══════════════════════════════════════════════
-         WHY ME — image AFTER heading text on mobile
+         WHY ME
       ═══════════════════════════════════════════════ */
       #why {
         background: var(--parchment);
@@ -1023,7 +1052,6 @@
         margin: 0;
       }
 
-      /* Full image — no fixed height clipping */
       .why-img-block {
         position: relative;
         padding-bottom: 30px;
@@ -1519,15 +1547,11 @@
 
       /* ═══════════════════════════════════════════════
          RESPONSIVE — MOBILE ≤767px
-         Key: hero image stacks BELOW text, ch/why images
-         also stack BELOW their text (order classes handle it)
       ═══════════════════════════════════════════════ */
       @media (max-width: 767px) {
         section {
           padding: 52px 0;
         }
-
-        /* Hero */
         #hero {
           padding-top: 72px;
           padding-bottom: 44px;
@@ -1561,15 +1585,12 @@
           flex-wrap: wrap;
           justify-content: center;
         }
-        /* Image below on mobile via order */
         .hero-text-col {
           order: 1;
         }
         .hero-image-col {
           order: 2;
         }
-
-        /* Challenges: heading, then image, then rest content */
         .ch-heading-col {
           order: 1;
         }
@@ -1580,8 +1601,6 @@
         .ch-content-col {
           order: 3;
         }
-
-        /* Why: heading, then image, then rest content */
         .why-heading-col {
           order: 1;
         }
@@ -1592,23 +1611,15 @@
         .why-content-col {
           order: 3;
         }
-
-        /* Section headings */
         h2.st {
           font-size: clamp(1.35rem, 6vw, 1.9rem);
         }
-
-        /* about */
         .about-quote {
           padding: 22px 18px;
         }
-
-        /* challenge highlight */
         .challenge-highlight {
           padding: 16px 18px;
         }
-
-        /* why floater */
         .why-floater {
           padding: 12px 16px;
         }
@@ -1618,8 +1629,6 @@
         .why-frame {
           display: none;
         }
-
-        /* CTA */
         .cta-box {
           padding: 40px 22px;
           border-radius: 20px;
@@ -1629,14 +1638,10 @@
           width: 100%;
           justify-content: center;
         }
-
-        /* trust */
         .trust-item {
           padding: 0 12px;
           font-size: 0.76rem;
         }
-
-        /* contact bar */
         .con-item {
           font-size: 0.8rem;
         }
@@ -1725,14 +1730,7 @@
           <span>i4s Ministry</span>
         </a>
         <div class="d-flex align-items-center gap-2 ms-auto d-lg-none">
-          <!--
-          LANGUAGE TOGGLE — COMMENTED OUT PER CLIENT REQUEST
-          <div class="d-flex align-items-center gap-1" style="background:rgba(26,63,168,0.08);border:1px solid rgba(26,63,168,0.2);border-radius:50px;padding:3px 5px;">
-            <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="ar">AR</button>
-            <button class="lang-btn" data-lang="he">HE</button>
-          </div>
-          -->
+          <!-- Custom toggler with animated hamburger → × -->
           <button
             class="navbar-toggler"
             type="button"
@@ -1742,7 +1740,11 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <div class="toggler-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </button>
         </div>
         <div class="collapse navbar-collapse" id="navMenu">
@@ -1764,14 +1766,6 @@
             </li>
           </ul>
           <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-            <!--
-            LANGUAGE TOGGLE DESKTOP — COMMENTED OUT PER CLIENT REQUEST
-            <div class="d-none d-lg-flex" style="display:flex;align-items:center;gap:4px;background:rgba(26,63,168,0.08);border:1px solid rgba(26,63,168,0.15);border-radius:50px;padding:4px 6px;">
-              <button class="lang-btn active" data-lang="en">EN</button>
-              <button class="lang-btn" data-lang="ar">AR</button>
-              <button class="lang-btn" data-lang="he">HE</button>
-            </div>
-            -->
             <a href="#cta" class="btn-nav-cta nav-link">Let's Talk</a>
           </div>
         </div>
@@ -1782,7 +1776,7 @@
     <section id="hero">
       <div class="container hero-inner">
         <div class="row align-items-center gy-4 gy-lg-5">
-          <!-- TEXT FIRST (order-1 on all screens) -->
+          <!-- TEXT FIRST -->
           <div class="col-lg-6 hero-text-col">
             <div class="hero-eyebrow reveal">
               <span class="line"></span>
@@ -1798,7 +1792,7 @@
               digital platforms through custom websites, hosting, AI-powered
               tools, and long-term technical support.
             </p>
-            <!-- IMAGE APPEARS HERE ON MOBILE - after the subtitle text -->
+            <!-- IMAGE ON MOBILE — after subtitle -->
             <div class="d-lg-none reveal d3">
               <div class="hero-card mb-4">
                 <img src="assets/AwnyJadon.jpeg" alt="Awny Jadon" />
@@ -1844,7 +1838,7 @@
             </div>
           </div>
 
-          <!-- IMAGE SECOND - only visible on desktop (d-none d-lg-block) -->
+          <!-- IMAGE — desktop only -->
           <div
             class="col-lg-5 offset-lg-1 hero-image-col reveal from-right d-none d-lg-block"
           >
@@ -2093,7 +2087,6 @@
     <section id="challenges">
       <div class="container position-relative">
         <div class="row gy-4 gy-lg-5 align-items-center">
-          <!-- HEADING COL - order-1 -->
           <div class="col-lg-7 ch-heading-col reveal from-right">
             <div class="label-tag">Common Struggles</div>
             <h2 class="st">
@@ -2126,7 +2119,6 @@
           </div>
         </div>
         <div class="row gy-4 gy-lg-5 align-items-center">
-          <!-- IMAGE COL - order-2 on mobile (appears after heading, before content) -->
           <div class="col-lg-5 ch-image-col reveal from-left">
             <img
               src="/assets/Awny.jpeg"
@@ -2134,7 +2126,6 @@
               class="ch-img"
             />
           </div>
-          <!-- CONTENT COL - order-3 on mobile -->
           <div class="col-lg-7 ch-content-col reveal from-right">
             <div class="ch-item">
               <div class="ch-dot"><i class="bi bi-dot"></i></div>
@@ -2193,7 +2184,6 @@
     <!-- ══════════ WHY ME ══════════ -->
     <section id="why">
       <div class="container position-relative">
-        <!-- HEADING ROW -->
         <div class="row gy-4 gy-lg-5 align-items-start">
           <div class="col-lg-5 why-heading-col reveal">
             <div class="label-tag">Why Work With Me</div>
@@ -2210,7 +2200,6 @@
           </div>
         </div>
         <div class="row gy-4 gy-lg-5 align-items-start">
-          <!-- IMAGE COL - order-2 on mobile (appears after heading, before steps) -->
           <div class="col-lg-6 offset-lg-1 why-image-col reveal from-right">
             <div class="why-img-block">
               <div class="why-frame"></div>
@@ -2224,7 +2213,6 @@
               </div>
             </div>
           </div>
-          <!-- CONTENT COL - order-3 on mobile -->
           <div class="col-lg-5 why-content-col reveal">
             <div class="why-step">
               <div class="why-n">01</div>
@@ -2576,57 +2564,94 @@
     </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
-    <!-- <script>
-      // Scroll to top button
-      const scrollTopBtn = document.getElementById("scrollTop");
+    <script>
+      /* ═══════════════════════════════════════════
+         NAVBAR SCROLL
+      ═══════════════════════════════════════════ */
+      const nav = document.getElementById("mainNav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 50);
+          document
+            .getElementById("scrollTop")
+            .classList.toggle("show", window.scrollY > 300);
+        },
+        { passive: true },
+      );
 
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 600) {
-          scrollTopBtn.classList.add("show");
-        } else {
-          scrollTopBtn.classList.remove("show");
-        }
-      });
+      /* ═══════════════════════════════════════════
+         SCROLL TO TOP
+      ═══════════════════════════════════════════ */
+      document
+        .getElementById("scrollTop")
+        .addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" }),
+        );
 
-      scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // Navbar scroll effect
-      const mainNav = document.getElementById("mainNav");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          mainNav.classList.add("scrolled");
-        } else {
-          mainNav.classList.remove("scrolled");
-        }
-      });
-
-      // Reveal animations
-      const revealElements = document.querySelectorAll(".reveal");
-
+      /* ═══════════════════════════════════════════
+         REVEAL ON SCROLL
+      ═══════════════════════════════════════════ */
       const revealObserver = new IntersectionObserver(
         (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              revealObserver.unobserve(e.target);
             }
           });
         },
-        {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObserver.observe(el));
+
+      /* ═══════════════════════════════════════════
+         HERO LOAD ANIMATION
+      ═══════════════════════════════════════════ */
+      window.addEventListener("load", () => {
+        document.querySelectorAll("#hero .reveal").forEach((el) => {
+          setTimeout(() => el.classList.add("visible"), 100);
+        });
+      });
+
+      /* ═══════════════════════════════════════════
+         ACTIVE NAV HIGHLIGHT
+      ═══════════════════════════════════════════ */
+      const navLinks = document.querySelectorAll(
+        ".navbar-nav .nav-link:not(.btn-nav-cta)",
+      );
+      const secIds = ["intro", "services", "challenges", "why", "testimonials"];
+      const secEls = secIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          let cur = "";
+          secEls.forEach((s) => {
+            if (window.scrollY >= s.offsetTop - 160) cur = s.id;
+          });
+          navLinks.forEach((l) => {
+            const match = l.getAttribute("href") === "#" + cur;
+            l.style.color = match ? "var(--gold-pale)" : "";
+          });
         },
+        { passive: true },
       );
 
-      revealElements.forEach((el) => revealObserver.observe(el));
-
-      // Fix overflow issue on mobile
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.style.overflowX = "hidden";
-        document.documentElement.style.overflowX = "hidden";
+      /* ═══════════════════════════════════════════
+         CLOSE MENU ON NAV LINK CLICK (mobile)
+      ═══════════════════════════════════════════ */
+      document.querySelectorAll("#navMenu .nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          const collapse = document.getElementById("navMenu");
+          const bsCollapse = bootstrap.Collapse.getInstance(collapse);
+          if (bsCollapse) bsCollapse.hide();
+        });
       });
-    </script> -->
+    </script>
   </body>
 </html>
