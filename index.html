@@ -1,0 +1,3166 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Awny Jadon — Ministry Digital Solutions</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Cinzel:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════
+   ROOT TOKENS
+═══════════════════════════════════════════════ */
+      :root {
+        --bg: #f8f4ed;
+        --bg2: #f2ece0;
+        --bg3: #ede4d4;
+        --parchment: #faf7f0;
+        --wine: #4a1028;
+        --wine-mid: #5e1530;
+        --wine-light: #7a1e40;
+        --gold: #b8860b;
+        --gold-bright: #d4a017;
+        --gold-pale: #f0d080;
+        --gold-glow: rgba(184, 134, 11, 0.2);
+        --ink: #1a0a0e;
+        --ink-soft: #3d1f28;
+        --muted: #7a6070;
+        --border: rgba(184, 134, 11, 0.22);
+        --border-wine: rgba(90, 21, 48, 0.18);
+        --white: #ffffff;
+        --cross-size: 44px;
+        --radius: 16px;
+        --radius-lg: 24px;
+        --shadow-sm: 0 4px 20px rgba(74, 16, 40, 0.1);
+        --shadow-md: 0 12px 40px rgba(74, 16, 40, 0.15);
+        --shadow-lg: 0 24px 70px rgba(74, 16, 40, 0.2);
+        --transition: 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      [dir="rtl"] {
+        --rtl: 1;
+      }
+
+      /* ═══════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+      body {
+        font-family: "Nunito", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        overflow-x: hidden;
+        line-height: 1.7;
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 3px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      a {
+        text-decoration: none;
+        transition: color var(--transition);
+      }
+
+      /* Hebrew / Arabic font stack */
+      :lang(he),
+      :lang(ar) {
+        font-family: "Nunito", "Arial Hebrew", "Tahoma", sans-serif;
+      }
+
+      /* ═══════════════════════════════════════════════
+   CHURCH PATTERN OVERLAY (decorative)
+═══════════════════════════════════════════════ */
+      .church-pattern {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+        background-image:
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(184, 134, 11, 0.04) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(74, 16, 40, 0.05) 0%,
+            transparent 50%
+          );
+      }
+      .church-pattern::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23b8860b' stroke-width='.3' opacity='.18'%3E%3Cpath d='M30 5 L30 55 M5 30 L55 30'/%3E%3Cpath d='M30 5 Q55 30 30 55 Q5 30 30 5'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 60px 60px;
+      }
+
+      /* ═══════════════════════════════════════════════
+   GOTHIC ARCH (CSS only)
+═══════════════════════════════════════════════ */
+      .arch-divider {
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        margin-bottom: -2px;
+      }
+      .arch-divider svg {
+        display: block;
+        width: 100%;
+        height: 60px;
+      }
+
+      /* ═══════════════════════════════════════════════
+   CROSS ORNAMENT
+═══════════════════════════════════════════════ */
+      .cross-ornament {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 18px;
+      }
+      .cross-ornament .v-bar {
+        width: 3px;
+        height: 28px;
+        background: linear-gradient(180deg, var(--gold), var(--gold-bright));
+        border-radius: 2px;
+      }
+      .cross-ornament .h-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .cross-ornament .h-bar {
+        width: 22px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+        border-radius: 2px;
+      }
+      .cross-ornament .h-bar-short {
+        width: 8px;
+        height: 3px;
+        background: var(--gold-pale);
+        border-radius: 2px;
+        opacity: 0.5;
+      }
+      .cross-ornament .v-bar-btm {
+        width: 3px;
+        height: 44px;
+        background: linear-gradient(
+          180deg,
+          var(--gold-bright),
+          rgba(184, 134, 11, 0.3)
+        );
+        border-radius: 2px;
+      }
+
+      /* Section cross top */
+      .section-cross {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .section-cross .sv {
+        width: 2px;
+        height: 18px;
+        background: var(--gold);
+        border-radius: 2px;
+      }
+      .section-cross .sh {
+        width: 14px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: -1px 0;
+      }
+      .section-cross .sv2 {
+        width: 2px;
+        height: 30px;
+        background: linear-gradient(180deg, var(--gold), transparent);
+        border-radius: 2px;
+      }
+
+      /* ═══════════════════════════════════════════════
+   LANGUAGE SWITCHER
+═══════════════════════════════════════════════ */
+      #langSwitcher {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 50px;
+        padding: 4px 6px;
+        backdrop-filter: blur(8px);
+      }
+      .lang-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-family: "Nunito", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 4px 10px;
+        border-radius: 50px;
+        transition: all 0.2s;
+        letter-spacing: 0.3px;
+      }
+      .lang-btn.active {
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        color: var(--ink);
+      }
+      .lang-btn:hover:not(.active) {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+      #mainNav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        padding: 16px 0;
+        background: transparent;
+        transition:
+          background 0.4s,
+          padding 0.4s,
+          box-shadow 0.4s;
+      }
+      #mainNav.scrolled {
+        background: rgba(74, 16, 40, 0.97);
+        backdrop-filter: blur(16px);
+        padding: 10px 0;
+        box-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+      }
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #fff !important;
+        letter-spacing: 0.5px;
+      }
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 18px var(--gold-glow);
+      }
+      /* Mini cross in brand */
+      .brand-icon::before,
+      .brand-icon::after {
+        content: "";
+        position: absolute;
+        background: var(--ink);
+        border-radius: 1px;
+      }
+      .brand-icon::before {
+        width: 2px;
+        height: 18px;
+      }
+      .brand-icon::after {
+        width: 14px;
+        height: 2px;
+      }
+
+      .nav-link {
+        font-family: "Nunito", sans-serif;
+        color: rgba(255, 255, 255, 0.75) !important;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 8px 14px !important;
+        position: relative;
+        transition: color 0.25s;
+        letter-spacing: 0.2px;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      .nav-link:hover {
+        color: var(--gold-pale) !important;
+      }
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .btn-nav-cta {
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 0.88rem;
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        color: var(--ink) !important;
+        border: none;
+        padding: 9px 22px !important;
+        border-radius: 50px;
+        box-shadow: 0 4px 18px var(--gold-glow);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .btn-nav-cta::after {
+        display: none;
+      }
+      .btn-nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px var(--gold-glow);
+        color: var(--ink) !important;
+      }
+
+      .navbar-toggler {
+        border: 1.5px solid var(--gold);
+        border-radius: 8px;
+        padding: 7px 10px;
+      }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23d4a017' stroke-linecap='round' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+
+      /* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+      #hero {
+        min-height: 100vh;
+        background: linear-gradient(
+          160deg,
+          rgba(74, 16, 40, 0.96) 0%,
+          rgba(30, 8, 16, 0.98) 55%,
+          rgba(15, 5, 10, 1) 100%
+        );
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding-top: 90px;
+      }
+
+      /* stained glass strips */
+      .glass-strip {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          var(--gold),
+          var(--gold-bright),
+          var(--gold),
+          transparent
+        );
+        opacity: 0.18;
+      }
+      .gs1 {
+        left: 15%;
+      }
+      .gs2 {
+        left: 30%;
+        opacity: 0.1;
+      }
+      .gs3 {
+        right: 15%;
+      }
+      .gs4 {
+        right: 30%;
+        opacity: 0.1;
+      }
+
+      /* Gothic window decoration */
+      .gothic-window {
+        position: absolute;
+        top: -60px;
+        right: 8%;
+        width: 220px;
+        height: 380px;
+        border: 1.5px solid rgba(184, 134, 11, 0.15);
+        border-radius: 110px 110px 0 0;
+        pointer-events: none;
+      }
+      .gothic-window::before {
+        content: "";
+        position: absolute;
+        inset: 20px;
+        border: 1px solid rgba(184, 134, 11, 0.1);
+        border-radius: 90px 90px 0 0;
+      }
+      .gothic-window-2 {
+        position: absolute;
+        top: -40px;
+        right: 12%;
+        width: 140px;
+        height: 260px;
+        border: 1px solid rgba(184, 134, 11, 0.08);
+        border-radius: 70px 70px 0 0;
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: var(--gold-pale);
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      .hero-eyebrow .line {
+        width: 32px;
+        height: 1.5px;
+        background: var(--gold);
+      }
+
+      #hero h1 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(2rem, 5vw, 3.7rem);
+        font-weight: 900;
+        line-height: 1.12;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+      #hero h1 .gold-text {
+        background: linear-gradient(
+          90deg,
+          var(--gold),
+          var(--gold-bright),
+          var(--gold-pale)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-family: "Nunito", sans-serif;
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        color: rgba(255, 255, 255, 0.72);
+        font-weight: 500;
+        line-height: 1.75;
+        max-width: 560px;
+        margin: 18px 0 24px;
+      }
+      .hero-meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 36px;
+      }
+      .hero-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .hero-meta-item i {
+        color: var(--gold);
+        font-size: 0.95rem;
+      }
+
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        color: var(--ink);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        padding: 15px 32px;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px var(--gold-glow);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        border: none;
+      }
+      .btn-hero-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 44px rgba(184, 134, 11, 0.38);
+        color: var(--ink);
+      }
+
+      .btn-hero-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        padding: 14px 30px;
+        border-radius: 50px;
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        transition: all 0.25s;
+      }
+      .btn-hero-ghost:hover {
+        border-color: var(--gold);
+        color: var(--gold-pale);
+        background: rgba(184, 134, 11, 0.08);
+      }
+
+      /* Hero image card */
+      .hero-card {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(184, 134, 11, 0.25);
+        border-radius: 28px;
+        padding: 28px;
+        position: relative;
+      }
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 40px;
+        right: 40px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+      }
+      .hero-card img {
+        width: 100%;
+        border-radius: 18px;
+        object-fit: cover;
+        height: 420px;
+        display: block;
+        border: 1px solid rgba(184, 134, 11, 0.2);
+      }
+      .hero-card-name {
+        font-family: "Cinzel", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        margin-top: 18px;
+        letter-spacing: 0.5px;
+      }
+      .hero-card-role {
+        font-size: 0.82rem;
+        color: var(--gold-pale);
+        text-align: center;
+        font-weight: 600;
+        margin-top: 4px;
+      }
+
+      /* stat chips */
+      .stat-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(184, 134, 11, 0.2);
+        border-radius: 50px;
+        padding: 8px 16px;
+        margin: 4px;
+      }
+      .stat-chip .n {
+        font-family: "Cinzel", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--gold-pale);
+      }
+      .stat-chip .l {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* ═══════════════════════════════════════════════
+   TRUST STRIP
+═══════════════════════════════════════════════ */
+      #trust {
+        background: var(--wine);
+        padding: 18px 0;
+        border-bottom: 2px solid rgba(184, 134, 11, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      #trust::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 58px,
+          rgba(255, 255, 255, 0.04) 58px,
+          rgba(255, 255, 255, 0.04) 60px
+        );
+      }
+      .trust-scroller {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .trust-scroller::-webkit-scrollbar {
+        display: none;
+      }
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 28px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        position: relative;
+        z-index: 1;
+      }
+      .trust-item i {
+        color: var(--gold-bright);
+        font-size: 1rem;
+      }
+      .trust-sep {
+        width: 1px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
+
+      /* ═══════════════════════════════════════════════
+   SECTION COMMONS
+═══════════════════════════════════════════════ */
+      section {
+        padding: 96px 0;
+        position: relative;
+      }
+
+      .label-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--wine-mid);
+        margin-bottom: 12px;
+      }
+      .label-tag::before,
+      .label-tag::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 1.5px;
+        background: var(--wine-mid);
+        flex-shrink: 0;
+      }
+
+      h2.st {
+        font-family: "Cinzel", serif;
+        font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.2;
+        margin-bottom: 14px;
+      }
+      h2.st .acc {
+        color: var(--wine-mid);
+      }
+      h2.st .gold-acc {
+        color: var(--gold);
+      }
+
+      .section-lead {
+        font-size: 1.03rem;
+        color: var(--muted);
+        font-weight: 500;
+        line-height: 1.8;
+      }
+
+      .ornament-line {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 18px 0;
+      }
+      .ornament-line .ol {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--border), transparent);
+      }
+      .ornament-line .ol-r {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border));
+      }
+      .ornament-line i {
+        color: var(--gold);
+        font-size: 0.9rem;
+      }
+
+      /* ═══════════════════════════════════════════════
+   ABOUT / INTRO
+═══════════════════════════════════════════════ */
+      #intro {
+        background: var(--parchment);
+      }
+      #intro::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='.7' fill='%23b8860b' opacity='.15'/%3E%3C/svg%3E");
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+
+      .about-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-top: 3px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 28px 26px;
+        box-shadow: var(--shadow-sm);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        height: 100%;
+      }
+      .about-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+      }
+      .about-card .ico {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--wine), var(--wine-light));
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: #fff;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 16px rgba(74, 16, 40, 0.25);
+      }
+      .about-card h5 {
+        font-family: "Cinzel", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+      .about-card p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .about-quote {
+        background: var(--wine);
+        border-radius: var(--radius-lg);
+        padding: 36px 34px;
+        position: relative;
+        overflow: hidden;
+      }
+      .about-quote::before {
+        content: "\201C";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        font-size: 8rem;
+        font-family: "Cinzel", serif;
+        color: rgba(255, 255, 255, 0.06);
+        line-height: 1;
+        pointer-events: none;
+      }
+      .about-quote p {
+        font-family: "Nunito", sans-serif;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.8;
+        margin-bottom: 18px;
+        position: relative;
+        z-index: 1;
+      }
+      .about-quote .sig {
+        font-family: "Cinzel", serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--gold-pale);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ═══════════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════════ */
+      #services {
+        background: var(--bg2);
+      }
+      #services::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          135deg,
+          transparent 0,
+          transparent 30px,
+          rgba(184, 134, 11, 0.025) 30px,
+          rgba(184, 134, 11, 0.025) 31px
+        );
+        pointer-events: none;
+      }
+
+      .svc-card {
+        background: var(--white);
+        border: 1px solid var(--border-wine);
+        border-radius: var(--radius);
+        padding: 32px 28px;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          border-color var(--transition);
+        cursor: default;
+      }
+      .svc-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--wine), var(--wine-light));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+      .svc-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(90, 21, 48, 0.3);
+      }
+      .svc-card:hover::after {
+        transform: scaleX(1);
+      }
+
+      .svc-num {
+        font-family: "Cinzel", serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: rgba(74, 16, 40, 0.07);
+        line-height: 1;
+        margin-bottom: 12px;
+      }
+      .svc-icon {
+        width: 54px;
+        height: 54px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--wine-mid);
+        margin-bottom: 18px;
+        transition:
+          background var(--transition),
+          color var(--transition);
+      }
+      .svc-card:hover .svc-icon {
+        background: var(--wine);
+        color: #fff;
+        border-color: var(--wine);
+      }
+      .svc-card h5 {
+        font-family: "Cinzel", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 10px;
+      }
+      .svc-card p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      /* ═══════════════════════════════════════════════
+   CHALLENGES — dark wine section
+═══════════════════════════════════════════════ */
+      #challenges {
+        background: var(--wine);
+        color: #fff;
+      }
+      #challenges::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 10% 30%,
+            rgba(184, 134, 11, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 90% 70%,
+            rgba(255, 255, 255, 0.03) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      #challenges h2.st {
+        color: #fff;
+      }
+      #challenges h2.st .acc {
+        color: var(--gold-pale);
+      }
+      #challenges .label-tag {
+        color: var(--gold-pale);
+      }
+      #challenges .label-tag::before,
+      #challenges .label-tag::after {
+        background: var(--gold-pale);
+      }
+      #challenges .section-lead {
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      .ch-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .ch-item:last-child {
+        border-bottom: none;
+      }
+      .ch-dot {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(184, 134, 11, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+      }
+      .ch-dot i {
+        font-size: 0.75rem;
+        color: var(--gold-bright);
+      }
+      .ch-item p {
+        font-size: 0.93rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.65;
+      }
+
+      .challenge-highlight {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(184, 134, 11, 0.25);
+        border-left: 4px solid var(--gold-bright);
+        border-radius: 0 14px 14px 0;
+        padding: 22px 26px;
+        margin-top: 28px;
+      }
+      .challenge-highlight p {
+        font-style: italic;
+        font-size: 0.97rem;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.75;
+        margin: 0;
+      }
+
+      .ch-img {
+        width: 100%;
+        height: 520px;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(184, 134, 11, 0.25);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      }
+
+      /* ═══════════════════════════════════════════════
+   WHY ME
+═══════════════════════════════════════════════ */
+      #why {
+        background: var(--parchment);
+      }
+      #why::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='.7' fill='%23b8860b' opacity='.12'/%3E%3C/svg%3E");
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+
+      .why-step {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .why-step:last-child {
+        border-bottom: none;
+      }
+      .why-n {
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--wine), var(--wine-light));
+        color: #fff;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(74, 16, 40, 0.25);
+      }
+      .why-step h6 {
+        font-family: "Cinzel", serif;
+        font-size: 0.97rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 7px;
+      }
+      .why-step p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.72;
+        margin: 0;
+      }
+
+      .why-img-block {
+        position: relative;
+      }
+      .why-img-block img {
+        width: 100%;
+        height: 540px;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+      }
+      .why-frame {
+        position: absolute;
+        top: -12px;
+        left: -12px;
+        right: 12px;
+        bottom: 12px;
+        border: 1.5px solid var(--gold);
+        border-radius: var(--radius-lg);
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.35;
+      }
+      .why-img-block img {
+        position: relative;
+        z-index: 1;
+      }
+
+      .why-floater {
+        position: absolute;
+        bottom: -16px;
+        left: 24px;
+        z-index: 2;
+        background: var(--wine);
+        border: 2px solid var(--gold);
+        border-radius: var(--radius);
+        padding: 16px 22px;
+        box-shadow: var(--shadow-md);
+      }
+      .why-floater .wf-n {
+        font-family: "Cinzel", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--gold-pale);
+        line-height: 1;
+      }
+      .why-floater .wf-l {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 2px;
+      }
+
+      /* ═══════════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════════ */
+      #testimonials {
+        background: var(--bg2);
+      }
+
+      .testi-card {
+        background: var(--white);
+        border: 1px solid var(--border-wine);
+        border-radius: var(--radius-lg);
+        padding: 32px 28px;
+        height: 100%;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+      .testi-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--wine),
+          var(--wine-light),
+          var(--gold)
+        );
+      }
+      .testi-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+      }
+      .testi-q {
+        font-size: 3.8rem;
+        font-family: "Cinzel", serif;
+        color: var(--wine);
+        opacity: 0.12;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .stars {
+        color: var(--gold);
+        font-size: 0.85rem;
+        margin-bottom: 14px;
+        letter-spacing: 2px;
+      }
+      .testi-text {
+        font-size: 0.93rem;
+        color: var(--ink-soft);
+        line-height: 1.82;
+        font-style: italic;
+        margin-bottom: 24px;
+      }
+      .testi-footer {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .testi-av {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, var(--wine), var(--wine-light));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .testi-name {
+        font-family: "Cinzel", serif;
+        font-size: 0.93rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .testi-role {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      /* ═══════════════════════════════════════════════
+   EDUCATION
+═══════════════════════════════════════════════ */
+      #education {
+        background: var(--wine);
+        color: #fff;
+      }
+      #education::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle at 80% 50%,
+          rgba(184, 134, 11, 0.07) 0%,
+          transparent 55%
+        );
+        pointer-events: none;
+      }
+      #education h2.st {
+        color: #fff;
+      }
+      #education h2.st .acc {
+        color: var(--gold-pale);
+      }
+      #education .label-tag {
+        color: var(--gold-pale);
+      }
+      #education .label-tag::before,
+      #education .label-tag::after {
+        background: var(--gold-pale);
+      }
+
+      .edu-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .edu-item:last-child {
+        border-bottom: none;
+      }
+      .edu-ico {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(184, 134, 11, 0.3);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        color: var(--gold-bright);
+      }
+      .edu-item h6 {
+        font-family: "Cinzel", serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 5px;
+      }
+      .edu-item p {
+        font-size: 0.87rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+        line-height: 1.65;
+      }
+
+      .lang-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(184, 134, 11, 0.3);
+        border-radius: 50px;
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--gold-pale);
+      }
+      .lang-chip i {
+        font-size: 0.95rem;
+      }
+
+      /* ═══════════════════════════════════════════════
+   CTA SECTION
+═══════════════════════════════════════════════ */
+      #cta {
+        background: var(--parchment);
+        overflow: hidden;
+      }
+      #cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='.7' fill='%23b8860b' opacity='.12'/%3E%3C/svg%3E");
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+      .cta-box {
+        background: var(--wine);
+        border-radius: 32px;
+        padding: 72px 60px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(184, 134, 11, 0.15) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(255, 255, 255, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      /* Decorative arches in CTA */
+      .cta-arch {
+        position: absolute;
+        width: 150px;
+        height: 250px;
+        border: 1px solid rgba(184, 134, 11, 0.12);
+        border-radius: 75px 75px 0 0;
+        pointer-events: none;
+      }
+      .ca1 {
+        bottom: -30px;
+        left: 20px;
+      }
+      .ca2 {
+        bottom: -50px;
+        right: 60px;
+        width: 100px;
+        height: 170px;
+        border-radius: 50px 50px 0 0;
+      }
+
+      .cta-cross {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .cta-cross .cv {
+        width: 3px;
+        height: 22px;
+        background: var(--gold);
+        border-radius: 2px;
+      }
+      .cta-cross .ch {
+        width: 18px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+        margin: -1px 0;
+      }
+      .cta-cross .cv2 {
+        width: 3px;
+        height: 36px;
+        background: linear-gradient(180deg, var(--gold), transparent);
+        border-radius: 2px;
+      }
+
+      .cta-box h2 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-box h2 span {
+        color: var(--gold-pale);
+      }
+      .cta-box p {
+        font-size: 1.03rem;
+        color: rgba(255, 255, 255, 0.72);
+        max-width: 520px;
+        margin: 0 auto 36px;
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+        color: var(--ink);
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 0.98rem;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 8px 30px rgba(184, 134, 11, 0.35);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        position: relative;
+        z-index: 1;
+      }
+      .btn-cta-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 42px rgba(184, 134, 11, 0.45);
+        color: var(--ink);
+      }
+
+      .btn-cta-wa {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #25d366;
+        color: #fff;
+        font-family: "Nunito", sans-serif;
+        font-weight: 800;
+        font-size: 0.98rem;
+        padding: 15px 30px;
+        border-radius: 50px;
+        box-shadow: 0 8px 26px rgba(37, 211, 102, 0.3);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        position: relative;
+        z-index: 1;
+      }
+      .btn-cta-wa:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 36px rgba(37, 211, 102, 0.4);
+        color: #fff;
+      }
+
+      /* ═══════════════════════════════════════════════
+   CONTACT BAR
+═══════════════════════════════════════════════ */
+      #contact-bar {
+        background: var(--ink);
+        padding: 28px 0;
+      }
+      .con-item {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 700;
+        font-size: 0.88rem;
+        transition: color 0.25s;
+      }
+      .con-item:hover {
+        color: var(--gold-pale);
+      }
+      .con-item i {
+        color: var(--gold-bright);
+        font-size: 1.1rem;
+      }
+
+      /* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+      footer {
+        background: var(--ink);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 22px 0;
+        text-align: center;
+      }
+      footer p {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.35);
+        margin: 0;
+      }
+      footer a {
+        color: var(--gold-bright);
+      }
+
+      /* ═══════════════════════════════════════════════
+   SCROLL TO TOP
+═══════════════════════════════════════════════ */
+      #scrollTop {
+        position: fixed;
+        bottom: 26px;
+        right: 26px;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--wine), var(--wine-light));
+        border: 2px solid var(--gold);
+        color: var(--gold-pale);
+        font-size: 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 997;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition:
+          opacity 0.3s,
+          transform 0.3s,
+          box-shadow 0.3s;
+        box-shadow: 0 4px 18px rgba(74, 16, 40, 0.3);
+      }
+      #scrollTop.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      #scrollTop:hover {
+        box-shadow: 0 8px 28px rgba(74, 16, 40, 0.5);
+      }
+
+      /* ═══════════════════════════════════════════════
+   ANIMATIONS (scroll reveal via IntersectionObserver)
+═══════════════════════════════════════════════ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.from-left {
+        transform: translateX(-44px);
+      }
+      .reveal.from-right {
+        transform: translateX(44px);
+      }
+      .reveal.scale-in {
+        transform: scale(0.94);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal.d1 {
+        transition-delay: 0.08s;
+      }
+      .reveal.d2 {
+        transition-delay: 0.16s;
+      }
+      .reveal.d3 {
+        transition-delay: 0.24s;
+      }
+      .reveal.d4 {
+        transition-delay: 0.32s;
+      }
+      .reveal.d5 {
+        transition-delay: 0.4s;
+      }
+
+      /* ═══════════════════════════════════════════════
+   RTL OVERRIDES
+═══════════════════════════════════════════════ */
+      [dir="rtl"] .label-tag::before {
+        display: none;
+      }
+      [dir="rtl"] .ornament-line .ol {
+        background: linear-gradient(270deg, var(--border), transparent);
+      }
+      [dir="rtl"] .ornament-line .ol-r {
+        background: linear-gradient(270deg, transparent, var(--border));
+      }
+      [dir="rtl"] .hero-eyebrow .line {
+        transform: scaleX(-1);
+      }
+      [dir="rtl"] .challenge-highlight {
+        border-left: none;
+        border-right: 4px solid var(--gold-bright);
+        border-radius: 14px 0 0 14px;
+      }
+      [dir="rtl"] .hero-card,
+      .why-img-block {
+        direction: rtl;
+      }
+      [dir="rtl"] .svc-card::after {
+        transform-origin: right;
+      }
+      [dir="rtl"] .nav-link::after {
+        transform-origin: right;
+      }
+      [dir="rtl"] .about-quote::before {
+        left: auto;
+        right: 20px;
+      }
+
+      /* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+      @media (max-width: 991px) {
+        section {
+          padding: 70px 0;
+        }
+        .hero-card img {
+          height: 280px;
+        }
+        .why-img-block img {
+          height: 380px;
+        }
+        .ch-img {
+          height: 320px;
+        }
+        .cta-box {
+          padding: 52px 32px;
+        }
+      }
+      @media (max-width: 767px) {
+        #hero {
+          padding-top: 90px;
+          padding-bottom: 50px;
+        }
+        .gothic-window,
+        .gothic-window-2 {
+          display: none;
+        }
+        .glass-strip {
+          display: none;
+        }
+        .cta-box {
+          padding: 44px 22px;
+        }
+        .hero-meta-row {
+          gap: 12px;
+        }
+        .trust-scroller {
+          justify-content: flex-start;
+        }
+      }
+      @media (max-width: 575px) {
+        .btn-hero-primary,
+        .btn-hero-ghost {
+          width: 100%;
+          justify-content: center;
+        }
+        .btn-cta-primary,
+        .btn-cta-wa {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════ NAVBAR ══════════ -->
+    <nav id="mainNav" class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <div class="brand-icon"></div>
+          <span data-i18n="brand">i4s Ministry</span>
+        </a>
+        <div class="d-flex align-items-center gap-2 ms-auto d-lg-none">
+          <div
+            id="langSwitcher2"
+            class="d-flex align-items-center gap-1"
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 50px;
+              padding: 3px 5px;
+            "
+          >
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ar">AR</button>
+            <button class="lang-btn" data-lang="he">HE</button>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navMenu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul
+            class="navbar-nav mx-auto align-items-lg-center gap-lg-0 py-3 py-lg-0"
+          >
+            <li class="nav-item">
+              <a class="nav-link" href="#intro" data-i18n="nav.about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services" data-i18n="nav.services"
+                >Services</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#challenges" data-i18n="nav.challenges"
+                >Challenges</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#why" data-i18n="nav.why">Why Me</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#testimonials"
+                data-i18n="nav.testimonials"
+                >Testimonials</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex align-items-center gap-3">
+            <div id="langSwitcher" class="d-none d-lg-flex">
+              <button class="lang-btn active" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="ar">AR</button>
+              <button class="lang-btn" data-lang="he">HE</button>
+            </div>
+            <a href="#cta" class="btn-nav-cta nav-link" data-i18n="nav.cta"
+              >Let's Talk</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section id="hero">
+      <div class="glass-strip gs1"></div>
+      <div class="glass-strip gs2"></div>
+      <div class="glass-strip gs3"></div>
+      <div class="glass-strip gs4"></div>
+      <div class="gothic-window"></div>
+      <div class="gothic-window-2"></div>
+
+      <div class="container hero-inner">
+        <div class="row align-items-center gy-5">
+          <div class="col-lg-6">
+            <div class="hero-eyebrow reveal">
+              <span class="line"></span>
+              <span data-i18n="hero.eyebrow"
+                >Ministry Digital Expert · Nazareth, Israel</span
+              >
+            </div>
+            <h1 class="reveal d1">
+              <div data-i18n="hero.h1a">Modern Digital</div>
+              <div data-i18n="hero.h1b">Solutions for</div>
+              <div class="gold-text" data-i18n="hero.h1c">
+                Churches &amp; Ministries
+              </div>
+            </h1>
+            <p class="hero-subtitle reveal d2" data-i18n="hero.subtitle">
+              Helping churches and Christian organizations build stronger
+              digital platforms through custom websites, hosting, AI-powered
+              tools, and long-term technical support.
+            </p>
+            <div class="hero-meta-row reveal d3">
+              <div class="hero-meta-item">
+                <i class="bi bi-award-fill"></i
+                ><span data-i18n="hero.m1">25+ Years Experience</span>
+              </div>
+              <div class="hero-meta-item">
+                <i class="bi bi-building"></i
+                ><span data-i18n="hero.m2">9+ Yrs NationsUniversity</span>
+              </div>
+              <div class="hero-meta-item">
+                <i class="bi bi-mortarboard-fill"></i
+                ><span data-i18n="hero.m3">FHU Computer Science</span>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-3 reveal d4">
+              <a href="#cta" class="btn-hero-primary">
+                <i class="bi bi-chat-heart-fill"></i>
+                <span data-i18n="hero.cta1">Discuss Your Needs</span>
+              </a>
+              <a href="#services" class="btn-hero-ghost">
+                <i class="bi bi-grid-3x3-gap"></i>
+                <span data-i18n="hero.cta2">Our Services</span>
+              </a>
+            </div>
+            <div class="mt-4 reveal d5">
+              <div class="stat-chip">
+                <span class="n">25+</span
+                ><span class="l" data-i18n="hero.s1">Yrs Web Dev</span>
+              </div>
+              <div class="stat-chip">
+                <span class="n">3</span
+                ><span class="l" data-i18n="hero.s2">Languages</span>
+              </div>
+              <div class="stat-chip">
+                <span class="n">9+</span
+                ><span class="l" data-i18n="hero.s3">NationsUniv</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 offset-lg-1 reveal from-right">
+            <div class="hero-card">
+              <img src="assets/AwnyJadon.jpeg" alt="Awny Jadon" />
+              <div class="hero-card-name">Awny Jadon</div>
+              <div class="hero-card-role" data-i18n="hero.role">
+                Ministry Digital Strategist · i4s.dev
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ TRUST ══════════ -->
+    <div id="trust">
+      <div class="container">
+        <div class="trust-scroller">
+          <div class="trust-item">
+            <i class="bi bi-award-fill"></i
+            ><span data-i18n="trust.t1">25+ Years of Experience</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">
+            <i class="bi bi-building"></i
+            ><span data-i18n="trust.t2">NationsUniversity · 9+ Years</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">
+            <i class="bi bi-heart-fill"></i
+            ><span data-i18n="trust.t3">Churches of Christ Background</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">
+            <i class="bi bi-translate"></i
+            ><span data-i18n="trust.t4">English · Arabic · Hebrew</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">
+            <i class="bi bi-cpu-fill"></i
+            ><span data-i18n="trust.t5">Custom Dev & AI Solutions</span>
+          </div>
+          <div class="trust-sep"></div>
+          <div class="trust-item">
+            <i class="bi bi-geo-alt-fill"></i
+            ><span data-i18n="trust.t6">Nazareth, Israel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ ABOUT / INTRO ══════════ -->
+    <section id="intro">
+      <div class="church-pattern"></div>
+      <div class="container position-relative">
+        <div class="row gy-5 align-items-start">
+          <div class="col-lg-5 reveal from-left">
+            <div class="label-tag" data-i18n="intro.label">About</div>
+            <h2 class="st">
+              <span data-i18n="intro.h2a">Technology Should</span><br /><span
+                class="acc"
+                data-i18n="intro.h2b"
+                >Support Ministry</span
+              ><br /><span data-i18n="intro.h2c">— Not Complicate It</span>
+            </h2>
+            <div class="ornament-line">
+              <div class="ol"></div>
+              <i class="bi bi-plus-lg"></i>
+              <div class="ol-r"></div>
+            </div>
+            <p class="section-lead mb-4" data-i18n="intro.p1">
+              Over the years, I have worked with universities, organizations,
+              ministries, and businesses in building and managing websites,
+              digital systems, outreach platforms, multilingual content, and
+              online engagement.
+            </p>
+            <p class="section-lead mb-4" data-i18n="intro.p2">
+              I have remained closely connected to ministry life through the
+              Church of Christ and through years of working with Christian
+              organizations and educational institutions.
+            </p>
+            <div class="about-quote mt-4">
+              <p data-i18n="intro.quote">
+                My goal is simple: to help churches and ministries build modern,
+                stable, trustworthy digital platforms that genuinely serve their
+                mission and people.
+              </p>
+              <div class="sig">— Awny Jadon · i4s.dev</div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-4">
+              <div class="col-sm-6 reveal d1">
+                <div class="about-card">
+                  <div class="ico">
+                    <i class="bi bi-building-fill-check"></i>
+                  </div>
+                  <h5 data-i18n="intro.c1h">Ministry-First Approach</h5>
+                  <p data-i18n="intro.c1p">
+                    As a member of the Nazareth Church of Christ in Israel,
+                    ministry is not simply a market I serve — it is part of my
+                    life and background.
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6 reveal d2">
+                <div class="about-card">
+                  <div class="ico"><i class="bi bi-laptop-fill"></i></div>
+                  <h5 data-i18n="intro.c2h">25+ Years Technical Depth</h5>
+                  <p data-i18n="intro.c2p">
+                    Deep expertise in web development, digital strategy, online
+                    systems, and modern AI tools tailored for real-world
+                    ministry needs.
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6 reveal d3">
+                <div class="about-card">
+                  <div class="ico"><i class="bi bi-translate"></i></div>
+                  <h5 data-i18n="intro.c3h">Multilingual Fluency</h5>
+                  <p data-i18n="intro.c3p">
+                    Fluent in English, Arabic, and Hebrew — enabling genuine
+                    outreach across cultures and international ministry
+                    networks.
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-6 reveal d4">
+                <div class="about-card">
+                  <div class="ico"><i class="bi bi-shield-fill-check"></i></div>
+                  <h5 data-i18n="intro.c4h">Long-Term Partnership</h5>
+                  <p data-i18n="intro.c4p">
+                    Not a one-time build. I offer ongoing support, guidance, and
+                    digital strategy as your trusted long-term technology
+                    partner.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- arch divider -->
+    <div style="background: var(--bg2); margin-top: -1px">
+      <svg
+        viewBox="0 0 1440 55"
+        xmlns="http://www.w3.org/2000/svg"
+        style="display: block; background: var(--parchment)"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,55 Q360,0 720,30 Q1080,55 1440,10 L1440,55Z"
+          fill="#f2ece0"
+        />
+      </svg>
+    </div>
+
+    <!-- ══════════ SERVICES ══════════ -->
+    <section id="services">
+      <div class="container position-relative">
+        <div class="text-center mb-5 reveal">
+          <div class="section-cross">
+            <div class="sv"></div>
+            <div class="sh"></div>
+            <div class="sv2"></div>
+          </div>
+          <div class="label-tag justify-content-center" data-i18n="svc.label">
+            Our Services
+          </div>
+          <h2 class="st">
+            <span data-i18n="svc.h2a">How I Help</span>
+            <span class="acc" data-i18n="svc.h2b"
+              >Churches &amp; Ministries</span
+            >
+          </h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4 reveal d1">
+            <div class="svc-card">
+              <div class="svc-num">01</div>
+              <div class="svc-icon"><i class="bi bi-window-sidebar"></i></div>
+              <h5 data-i18n="svc.s1h">Church &amp; Ministry Websites</h5>
+              <p data-i18n="svc.s1p">
+                Modern, mobile-friendly websites designed specifically for
+                churches, ministries, and Christian organizations that reflect
+                your identity and values.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal d2">
+            <div class="svc-card">
+              <div class="svc-num">02</div>
+              <div class="svc-icon"><i class="bi bi-hdd-network-fill"></i></div>
+              <h5 data-i18n="svc.s2h">Hosting &amp; Long-Term Support</h5>
+              <p data-i18n="svc.s2p">
+                Reliable hosting, maintenance, updates, backups, security
+                monitoring, and technical guidance so you can focus on ministry.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal d3">
+            <div class="svc-card">
+              <div class="svc-num">03</div>
+              <div class="svc-icon"><i class="bi bi-robot"></i></div>
+              <h5 data-i18n="svc.s3h">AI-Powered Ministry Solutions</h5>
+              <p data-i18n="svc.s3p">
+                Practical AI tools that help ministries improve communication,
+                content management, multilingual outreach, and member
+                engagement.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal d1">
+            <div class="svc-card">
+              <div class="svc-num">04</div>
+              <div class="svc-icon"><i class="bi bi-code-square"></i></div>
+              <h5 data-i18n="svc.s4h">Custom Development</h5>
+              <p data-i18n="svc.s4p">
+                Tailored web applications, ministry systems, integrations, and
+                specialized digital tools built around your ministry's actual
+                needs.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal d2">
+            <div class="svc-card">
+              <div class="svc-num">05</div>
+              <div class="svc-icon"><i class="bi bi-broadcast-pin"></i></div>
+              <h5 data-i18n="svc.s5h">Digital Strategy &amp; Outreach</h5>
+              <p data-i18n="svc.s5p">
+                Helping churches improve communication, visibility, outreach,
+                and engagement in a rapidly changing digital world.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 reveal d3">
+            <div class="svc-card">
+              <div class="svc-num">06</div>
+              <div class="svc-icon"><i class="bi bi-globe-americas"></i></div>
+              <h5 data-i18n="svc.s6h">Multilingual Ministry Support</h5>
+              <p data-i18n="svc.s6p">
+                Deep experience working with English, Arabic, and Hebrew content
+                and outreach initiatives across international communities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CHALLENGES ══════════ -->
+    <section id="challenges">
+      <div class="container position-relative">
+        <div class="row gy-5 align-items-center">
+          <div class="col-lg-5 reveal from-left">
+            <img
+              src="/assets/Awny.jpeg"
+              alt="Church digital challenges"
+              class="ch-img"
+            />
+          </div>
+          <div class="col-lg-7 reveal from-right">
+            <div class="label-tag" data-i18n="ch.label">Common Struggles</div>
+            <h2 class="st">
+              <span data-i18n="ch.h2a">Many Churches Are Facing</span
+              ><br /><span class="acc" data-i18n="ch.h2b"
+                >Digital Challenges</span
+              >
+            </h2>
+            <div class="ornament-line my-3">
+              <div
+                class="ol"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    rgba(184, 134, 11, 0.5),
+                    transparent
+                  );
+                "
+              ></div>
+              <i class="bi bi-plus-lg" style="color: var(--gold-pale)"></i>
+              <div
+                class="ol-r"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(184, 134, 11, 0.2)
+                  );
+                "
+              ></div>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c1">
+                Websites that no longer reflect the church well and fail to
+                attract new visitors
+              </p>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c2">
+                Difficulty reaching younger generations online through modern
+                digital channels
+              </p>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c3">
+                Limited technical support and guidance from trusted,
+                ministry-aware partners
+              </p>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c4">
+                Poor mobile experience for members and visitors accessing church
+                resources
+              </p>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c5">
+                Managing multiple digital tools and communication channels
+                without strategy
+              </p>
+            </div>
+            <div class="ch-item">
+              <div class="ch-dot"><i class="bi bi-dot"></i></div>
+              <p data-i18n="ch.c6">
+                Uncertainty about how AI and modern tools can practically help
+                ministry
+              </p>
+            </div>
+            <div class="challenge-highlight">
+              <p data-i18n="ch.note">
+                Technology should help ministries communicate better, stay
+                organized, save time, and focus more on people and ministry —
+                not create additional stress and confusion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ WHY ME ══════════ -->
+    <section id="why">
+      <div class="church-pattern"></div>
+      <div class="container position-relative">
+        <div class="row gy-5 align-items-start">
+          <div class="col-lg-5 reveal">
+            <div class="label-tag" data-i18n="why.label">Why Work With Me</div>
+            <h2 class="st">
+              <span data-i18n="why.h2a">Ministry Understanding</span><br /><span
+                class="acc"
+                data-i18n="why.h2b"
+                >Combined With Technical</span
+              ><br /><span data-i18n="why.h2c">Excellence</span>
+            </h2>
+            <div class="ornament-line">
+              <div class="ol"></div>
+              <i class="bi bi-plus-lg"></i>
+              <div class="ol-r"></div>
+            </div>
+            <div class="why-step">
+              <div class="why-n">01</div>
+              <div>
+                <h6 data-i18n="why.s1h">Not Just a Web Agency</h6>
+                <p data-i18n="why.s1p">
+                  My background combines technical expertise, digital strategy,
+                  and long-term involvement with Christian organizations —
+                  unlike agencies that simply build websites and move on.
+                </p>
+              </div>
+            </div>
+            <div class="why-step">
+              <div class="why-n">02</div>
+              <div>
+                <h6 data-i18n="why.s2h">9+ Years at NationsUniversity</h6>
+                <p data-i18n="why.s2p">
+                  Website development, multilingual content management, SEO,
+                  analytics, digital strategy, and support for ministry and
+                  educational initiatives at a leading Christian online
+                  university.
+                </p>
+              </div>
+            </div>
+            <div class="why-step">
+              <div class="why-n">03</div>
+              <div>
+                <h6 data-i18n="why.s3h">AI-Powered Modern Solutions</h6>
+                <p data-i18n="why.s3p">
+                  Through i4s, I help organizations build modern, stable,
+                  customized digital solutions using advanced development and
+                  AI-powered systems tailored to actual ministry needs.
+                </p>
+              </div>
+            </div>
+            <div class="why-step">
+              <div class="why-n">04</div>
+              <div>
+                <h6 data-i18n="why.s4h">Ministry Is My Life</h6>
+                <p data-i18n="why.s4p">
+                  As a member of the Nazareth Church of Christ in Israel and son
+                  of Maurice Jadon, preacher of the Church of Christ in Nazareth
+                  — this is personal, not just professional.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 offset-lg-1 reveal from-right">
+            <div class="why-img-block">
+              <div class="why-frame"></div>
+              <img
+                src="https://images.unsplash.com/photo-1663321231228-2625873fbdcd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Ministry and Technology"
+              />
+              <div class="why-floater">
+                <div class="wf-n">9+</div>
+                <div class="wf-l" data-i18n="why.floater">
+                  Years at NationsUniversity
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ TESTIMONIALS ══════════ -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="text-center mb-5 reveal">
+          <div class="section-cross">
+            <div class="sv"></div>
+            <div class="sh"></div>
+            <div class="sv2"></div>
+          </div>
+          <div class="label-tag justify-content-center" data-i18n="testi.label">
+            Endorsements
+          </div>
+          <h2 class="st">
+            <span data-i18n="testi.h2a">What Leaders</span>
+            <span class="acc" data-i18n="testi.h2b">Say About Awny</span>
+          </h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 reveal d1">
+            <div class="testi-card">
+              <div class="testi-q">"</div>
+              <div class="stars">★★★★★</div>
+              <p class="testi-text" data-i18n="testi.t1">
+                I have known Awny for more than 25 years and have always known
+                him to be dependable, hardworking, professional, and an
+                outstanding Christian. He distinguished himself as both a strong
+                student and a reliable professional with an excellent attitude
+                and character. I consider Awny not only highly capable, but also
+                a personal friend.
+              </p>
+              <div class="testi-footer">
+                <div class="testi-av">WS</div>
+                <div>
+                  <div class="testi-name">Wayne Scott</div>
+                  <div class="testi-role" data-i18n="testi.r1">
+                    Executive VP, Bethel University of Tennessee
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 reveal d2">
+            <div class="testi-card">
+              <div class="testi-q">"</div>
+              <div class="stars">★★★★★</div>
+              <p class="testi-text" data-i18n="testi.t2">
+                I have known Awny for over 12 years and worked with him for 9
+                years. He demonstrated honesty, professionalism, reliability,
+                and strong technical knowledge. He consistently took on major
+                projects from start to finish and was an important asset to
+                NationsUniversity. Most importantly, Awny is an outstanding and
+                loyal Christian.
+              </p>
+              <div class="testi-footer">
+                <div class="testi-av">JS</div>
+                <div>
+                  <div class="testi-name">Jon-Roy Sloan</div>
+                  <div class="testi-role" data-i18n="testi.r2">
+                    Director of Communications, NationsUniversity
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 reveal d3">
+            <div class="testi-card">
+              <div class="testi-q">"</div>
+              <div class="stars">★★★★★</div>
+              <p class="testi-text" data-i18n="testi.t3">
+                I hired Awny to run an outreach campaign to promote our services
+                in a specific region. Beyond being a super nice guy, Awny was a
+                true professional — comprehensive throughout the entire process.
+                I highly recommend him for any digital outreach or campaign
+                initiative.
+              </p>
+              <div class="testi-footer">
+                <div class="testi-av">YS</div>
+                <div>
+                  <div class="testi-name">Yuval Sive</div>
+                  <div class="testi-role" data-i18n="testi.r3">
+                    Senior Commercial Leader, Comply365
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ EDUCATION ══════════ -->
+    <section id="education">
+      <div class="container position-relative">
+        <div class="row gy-5 align-items-start">
+          <div class="col-lg-5 reveal from-left">
+            <div class="label-tag" data-i18n="edu.label">Background</div>
+            <h2 class="st">
+              <span data-i18n="edu.h2a">Education &amp;</span><br /><span
+                class="acc"
+                data-i18n="edu.h2b"
+                >Ministry Background</span
+              >
+            </h2>
+            <div class="ornament-line my-3">
+              <div
+                class="ol"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    rgba(184, 134, 11, 0.5),
+                    transparent
+                  );
+                "
+              ></div>
+              <i class="bi bi-plus-lg" style="color: var(--gold-pale)"></i>
+              <div
+                class="ol-r"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(184, 134, 11, 0.2)
+                  );
+                "
+              ></div>
+            </div>
+            <p
+              class="section-lead mb-4"
+              style="color: rgba(255, 255, 255, 0.65)"
+              data-i18n="edu.desc"
+            >
+              A foundation built on both academic excellence and deep ministry
+              involvement — bridging the technical and the spiritual for over 25
+              years.
+            </p>
+            <div>
+              <div class="lang-chip">
+                <i class="bi bi-chat-text"></i> English
+              </div>
+              <div class="lang-chip">
+                <i class="bi bi-chat-text"></i> العربية
+              </div>
+              <div class="lang-chip"><i class="bi bi-chat-text"></i> עברית</div>
+            </div>
+          </div>
+          <div class="col-lg-7 reveal from-right">
+            <div class="edu-item">
+              <div class="edu-ico"><i class="bi bi-mortarboard-fill"></i></div>
+              <div>
+                <h6 data-i18n="edu.e1h">B.Sc. in Computer Science</h6>
+                <p data-i18n="edu.e1p">
+                  Freed-Hardeman University, Tennessee — Dean's List Honors in
+                  Computer Science
+                </p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-ico"><i class="bi bi-building-fill"></i></div>
+              <div>
+                <h6 data-i18n="edu.e2h">
+                  Senior Digital & Internet Specialist
+                </h6>
+                <p data-i18n="edu.e2p">
+                  NationsUniversity — 9+ years managing websites, SEO,
+                  multilingual content & digital strategy
+                </p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-ico">
+                <i class="bi bi-building-fill-check"></i>
+              </div>
+              <div>
+                <h6 data-i18n="edu.e3h">Member, Nazareth Church of Christ</h6>
+                <p data-i18n="edu.e3p">
+                  Active member of the Nazareth Church of Christ in Israel —
+                  deeply connected to ministry life
+                </p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-ico"><i class="bi bi-person-hearts"></i></div>
+              <div>
+                <h6 data-i18n="edu.e4h">Family of Ministry</h6>
+                <p data-i18n="edu.e4p">
+                  Son of Maurice Jadon, preacher of the Church of Christ in
+                  Nazareth — ministry runs in the family
+                </p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-ico"><i class="bi bi-laptop-fill"></i></div>
+              <div>
+                <h6 data-i18n="edu.e5h">Founder, i4s Digital Agency</h6>
+                <p data-i18n="edu.e5p">
+                  Building modern, stable, AI-powered digital solutions for
+                  organizations, ministries, and businesses
+                </p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <div class="edu-ico"><i class="bi bi-clock-history"></i></div>
+              <div>
+                <h6 data-i18n="edu.e6h">25+ Years in Web Development</h6>
+                <p data-i18n="edu.e6p">
+                  Web development, programming, online systems, digital
+                  outreach, and organizational technology since the early web
+                  era
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CTA ══════════ -->
+    <section id="cta">
+      <div class="church-pattern"></div>
+      <div class="container position-relative">
+        <div class="cta-box reveal scale-in">
+          <div class="cta-arch ca1"></div>
+          <div class="cta-arch ca2"></div>
+          <div class="cta-cross">
+            <div class="cv"></div>
+            <div class="ch"></div>
+            <div class="cv2"></div>
+          </div>
+          <div
+            class="label-tag justify-content-center mb-3"
+            style="color: var(--gold-pale)"
+            data-i18n="cta.label"
+          >
+            Get In Touch
+          </div>
+          <h2>
+            <span data-i18n="cta.h2a">Let's Talk About Your</span><br /><span
+              data-i18n="cta.h2b"
+              >Ministry's Digital Needs</span
+            >
+          </h2>
+          <p data-i18n="cta.desc">
+            Whether your church needs a modern website, technical guidance,
+            hosting, AI-powered tools, multilingual support, or long-term
+            digital help — I would be honored to help.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="mailto:hello@i4s.dev" class="btn-cta-primary">
+              <i class="bi bi-envelope-fill"></i>
+              <span data-i18n="cta.btn1">Discuss Your Ministry's Needs</span>
+            </a>
+            <a
+              href="https://wa.me/972545551787"
+              target="_blank"
+              class="btn-cta-wa"
+            >
+              <i class="bi bi-whatsapp"></i>
+              <span data-i18n="cta.btn2">Contact via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ CONTACT BAR ══════════ -->
+    <div id="contact-bar">
+      <div class="container">
+        <div class="row gy-3 justify-content-center">
+          <div class="col-6 col-md-3 text-center">
+            <a
+              href="mailto:hello@i4s.dev"
+              class="con-item justify-content-center"
+              ><i class="bi bi-envelope-fill"></i>hello@i4s.dev</a
+            >
+          </div>
+          <div class="col-6 col-md-3 text-center">
+            <a href="tel:+97254555178" class="con-item justify-content-center"
+              ><i class="bi bi-telephone-fill"></i>+972 54-555-1787</a
+            >
+          </div>
+          <div class="col-6 col-md-3 text-center">
+            <a
+              href="https://i4s.dev"
+              target="_blank"
+              class="con-item justify-content-center"
+              ><i class="bi bi-globe2"></i>i4s.dev</a
+            >
+          </div>
+          <div class="col-6 col-md-3 text-center">
+            <a
+              href="https://wa.me/972545551787"
+              target="_blank"
+              class="con-item justify-content-center"
+              ><i class="bi bi-whatsapp"></i>WhatsApp</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>
+          © 2025 Awny Jadon &nbsp;·&nbsp;
+          <a href="https://i4s.dev">i4s.dev</a> &nbsp;·&nbsp; Nazareth, Israel
+          &nbsp;·&nbsp; EN · AR · HE
+        </p>
+      </div>
+    </footer>
+
+    <button id="scrollTop" aria-label="Scroll to top">
+      <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <!-- ════ SCRIPTS ════ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      /* ═══════════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════════ */
+      const translations = {
+        en: {
+          brand: "i4s Ministry",
+          "nav.about": "About",
+          "nav.services": "Services",
+          "nav.challenges": "Challenges",
+          "nav.why": "Why Me",
+          "nav.testimonials": "Testimonials",
+          "nav.cta": "Let's Talk",
+          "hero.eyebrow": "Ministry Digital Expert · Nazareth, Israel",
+          "hero.h1a": "Modern Digital",
+          "hero.h1b": "Solutions for",
+          "hero.h1c": "Churches & Ministries",
+          "hero.subtitle":
+            "Helping churches and Christian organizations build stronger digital platforms through custom websites, hosting, AI-powered tools, and long-term technical support.",
+          "hero.m1": "25+ Years Experience",
+          "hero.m2": "9+ Yrs NationsUniversity",
+          "hero.m3": "FHU Computer Science",
+          "hero.cta1": "Discuss Your Needs",
+          "hero.cta2": "Our Services",
+          "hero.s1": "Yrs Web Dev",
+          "hero.s2": "Languages",
+          "hero.s3": "NationsUniv",
+          "hero.role": "Ministry Digital Strategist · i4s.dev",
+          "trust.t1": "25+ Years of Experience",
+          "trust.t2": "NationsUniversity · 9+ Years",
+          "trust.t3": "Churches of Christ Background",
+          "trust.t4": "English · Arabic · Hebrew",
+          "trust.t5": "Custom Dev & AI Solutions",
+          "trust.t6": "Nazareth, Israel",
+          "intro.label": "About",
+          "intro.h2a": "Technology Should",
+          "intro.h2b": "Support Ministry",
+          "intro.h2c": "— Not Complicate It",
+          "intro.p1":
+            "Over the years, I have worked with universities, organizations, ministries, and businesses in building and managing websites, digital systems, outreach platforms, multilingual content, and online engagement.",
+          "intro.p2":
+            "I have remained closely connected to ministry life through the Church of Christ and through years of working with Christian organizations and educational institutions.",
+          "intro.quote":
+            "My goal is simple: to help churches and ministries build modern, stable, trustworthy digital platforms that genuinely serve their mission and people.",
+          "intro.c1h": "Ministry-First Approach",
+          "intro.c1p":
+            "As a member of the Nazareth Church of Christ in Israel, ministry is not simply a market I serve — it is part of my life and background.",
+          "intro.c2h": "25+ Years Technical Depth",
+          "intro.c2p":
+            "Deep expertise in web development, digital strategy, online systems, and modern AI tools tailored for real-world ministry needs.",
+          "intro.c3h": "Multilingual Fluency",
+          "intro.c3p":
+            "Fluent in English, Arabic, and Hebrew — enabling genuine outreach across cultures and international ministry networks.",
+          "intro.c4h": "Long-Term Partnership",
+          "intro.c4p":
+            "Not a one-time build. I offer ongoing support, guidance, and digital strategy as your trusted long-term technology partner.",
+          "svc.label": "Our Services",
+          "svc.h2a": "How I Help",
+          "svc.h2b": "Churches & Ministries",
+          "svc.s1h": "Church & Ministry Websites",
+          "svc.s1p":
+            "Modern, mobile-friendly websites designed specifically for churches, ministries, and Christian organizations that reflect your identity and values.",
+          "svc.s2h": "Hosting & Long-Term Support",
+          "svc.s2p":
+            "Reliable hosting, maintenance, updates, backups, security monitoring, and technical guidance so you can focus on ministry.",
+          "svc.s3h": "AI-Powered Ministry Solutions",
+          "svc.s3p":
+            "Practical AI tools that help ministries improve communication, content management, multilingual outreach, and member engagement.",
+          "svc.s4h": "Custom Development",
+          "svc.s4p":
+            "Tailored web applications, ministry systems, integrations, and specialized digital tools built around your ministry's actual needs.",
+          "svc.s5h": "Digital Strategy & Outreach",
+          "svc.s5p":
+            "Helping churches improve communication, visibility, outreach, and engagement in a rapidly changing digital world.",
+          "svc.s6h": "Multilingual Ministry Support",
+          "svc.s6p":
+            "Deep experience working with English, Arabic, and Hebrew content and outreach initiatives across international communities.",
+          "ch.label": "Common Struggles",
+          "ch.h2a": "Many Churches Are Facing",
+          "ch.h2b": "Digital Challenges",
+          "ch.c1":
+            "Websites that no longer reflect the church well and fail to attract new visitors",
+          "ch.c2":
+            "Difficulty reaching younger generations online through modern digital channels",
+          "ch.c3":
+            "Limited technical support and guidance from trusted, ministry-aware partners",
+          "ch.c4":
+            "Poor mobile experience for members and visitors accessing church resources",
+          "ch.c5":
+            "Managing multiple digital tools and communication channels without strategy",
+          "ch.c6":
+            "Uncertainty about how AI and modern tools can practically help ministry",
+          "ch.note":
+            "Technology should help ministries communicate better, stay organized, save time, and focus more on people and ministry — not create additional stress and confusion.",
+          "why.label": "Why Work With Me",
+          "why.h2a": "Ministry Understanding",
+          "why.h2b": "Combined With Technical",
+          "why.h2c": "Excellence",
+          "why.s1h": "Not Just a Web Agency",
+          "why.s1p":
+            "My background combines technical expertise, digital strategy, and long-term involvement with Christian organizations — unlike agencies that simply build websites and move on.",
+          "why.s2h": "9+ Years at NationsUniversity",
+          "why.s2p":
+            "Website development, multilingual content management, SEO, analytics, digital strategy, and support for ministry and educational initiatives.",
+          "why.s3h": "AI-Powered Modern Solutions",
+          "why.s3p":
+            "Through i4s, I help organizations build modern, stable, customized digital solutions using advanced development and AI-powered systems.",
+          "why.s4h": "Ministry Is My Life",
+          "why.s4p":
+            "As a member of the Nazareth Church of Christ and son of Maurice Jadon, preacher of the Church of Christ in Nazareth — this is personal, not just professional.",
+          "why.floater": "Years at NationsUniversity",
+          "testi.label": "Endorsements",
+          "testi.h2a": "What Leaders",
+          "testi.h2b": "Say About Awny",
+          "testi.t1":
+            "I have known Awny for more than 25 years and have always known him to be dependable, hardworking, professional, and an outstanding Christian. He distinguished himself as both a strong student and a reliable professional with an excellent attitude and character.",
+          "testi.r1": "Executive VP, Bethel University of Tennessee",
+          "testi.t2":
+            "I have known Awny for over 12 years and worked with him for 9 years. He demonstrated honesty, professionalism, reliability, and strong technical knowledge. He was an important asset to NationsUniversity. Most importantly, Awny is an outstanding and loyal Christian.",
+          "testi.r2": "Director of Communications, NationsUniversity",
+          "testi.t3":
+            "I hired Awny to run an outreach campaign to promote our services in a specific region. Beyond being a super nice guy, Awny was a true professional — comprehensive throughout the entire process.",
+          "testi.r3": "Senior Commercial Leader, Comply365",
+          "edu.label": "Background",
+          "edu.h2a": "Education &",
+          "edu.h2b": "Ministry Background",
+          "edu.desc":
+            "A foundation built on both academic excellence and deep ministry involvement — bridging the technical and the spiritual for over 25 years.",
+          "edu.e1h": "B.Sc. in Computer Science",
+          "edu.e1p":
+            "Freed-Hardeman University, Tennessee — Dean's List Honors",
+          "edu.e2h": "Senior Digital & Internet Specialist",
+          "edu.e2p":
+            "NationsUniversity — 9+ years managing websites, SEO, multilingual content & digital strategy",
+          "edu.e3h": "Member, Nazareth Church of Christ",
+          "edu.e3p":
+            "Active member of the Nazareth Church of Christ in Israel — deeply connected to ministry life",
+          "edu.e4h": "Family of Ministry",
+          "edu.e4p":
+            "Son of Maurice Jadon, preacher of the Church of Christ in Nazareth — ministry runs in the family",
+          "edu.e5h": "Founder, i4s Digital Agency",
+          "edu.e5p":
+            "Building modern, stable, AI-powered digital solutions for organizations, ministries, and businesses",
+          "edu.e6h": "25+ Years in Web Development",
+          "edu.e6p":
+            "Web development, programming, online systems, digital outreach, and organizational technology",
+          "cta.label": "Get In Touch",
+          "cta.h2a": "Let's Talk About Your",
+          "cta.h2b": "Ministry's Digital Needs",
+          "cta.desc":
+            "Whether your church needs a modern website, technical guidance, hosting, AI-powered tools, multilingual support, or long-term digital help — I would be honored to help.",
+          "cta.btn1": "Discuss Your Ministry's Needs",
+          "cta.btn2": "Contact via WhatsApp",
+        },
+        ar: {
+          brand: "i4s للوزارة",
+          "nav.about": "عن أوني",
+          "nav.services": "الخدمات",
+          "nav.challenges": "التحديات",
+          "nav.why": "لماذا أنا",
+          "nav.testimonials": "التوصيات",
+          "nav.cta": "تحدث معي",
+          "hero.eyebrow": "خبير رقمي في مجال الوزارة · الناصرة، إسرائيل",
+          "hero.h1a": "حلول رقمية حديثة",
+          "hero.h1b": "للكنائس",
+          "hero.h1c": "والمنظمات المسيحية",
+          "hero.subtitle":
+            "مساعدة الكنائس والمنظمات المسيحية على بناء منصات رقمية أقوى من خلال المواقع المخصصة والاستضافة وأدوات الذكاء الاصطناعي والدعم التقني طويل الأمد.",
+          "hero.m1": "أكثر من 25 عامًا خبرة",
+          "hero.m2": "9+ سنوات في NationsUniversity",
+          "hero.m3": "علوم الكمبيوتر - FHU",
+          "hero.cta1": "ناقش احتياجاتك",
+          "hero.cta2": "خدماتنا",
+          "hero.s1": "سنوات تطوير الويب",
+          "hero.s2": "لغات",
+          "hero.s3": "NationsUniv",
+          "hero.role": "استراتيجي رقمي للوزارة · i4s.dev",
+          "trust.t1": "أكثر من 25 عامًا خبرة",
+          "trust.t2": "NationsUniversity · 9+ سنوات",
+          "trust.t3": "خلفية كنائس المسيح",
+          "trust.t4": "الإنجليزية · العربية · العبرية",
+          "trust.t5": "تطوير مخصص وحلول ذكاء اصطناعي",
+          "trust.t6": "الناصرة، إسرائيل",
+          "intro.label": "عن أوني",
+          "intro.h2a": "التكنولوجيا يجب أن",
+          "intro.h2b": "تدعم الوزارة",
+          "intro.h2c": "— لا أن تعقدها",
+          "intro.p1":
+            "على مدار السنوات، عملت مع الجامعات والمنظمات والوزارات والشركات في بناء وإدارة المواقع والأنظمة الرقمية ومنصات التواصل والمحتوى متعدد اللغات.",
+          "intro.p2":
+            "بقيت على تواصل وثيق مع حياة الوزارة من خلال كنيسة المسيح وسنوات من العمل مع المنظمات المسيحية والمؤسسات التعليمية.",
+          "intro.quote":
+            "هدفي بسيط: مساعدة الكنائس والوزارات على بناء منصات رقمية حديثة وموثوقة تخدم رسالتهم وشعبهم حقًا.",
+          "intro.c1h": "نهج يضع الوزارة أولًا",
+          "intro.c1p":
+            "بصفتي عضوًا في كنيسة المسيح في الناصرة، فإن الوزارة ليست مجرد سوق أخدمه — إنها جزء من حياتي وخلفيتي.",
+          "intro.c2h": "عمق تقني يمتد لأكثر من 25 عامًا",
+          "intro.c2p":
+            "خبرة عميقة في تطوير الويب والاستراتيجية الرقمية وأدوات الذكاء الاصطناعي الحديثة.",
+          "intro.c3h": "إتقان لغوي متعدد",
+          "intro.c3p":
+            "إتقان الإنجليزية والعربية والعبرية — مما يتيح التواصل الحقيقي عبر الثقافات.",
+          "intro.c4h": "شراكة طويلة الأمد",
+          "intro.c4p":
+            "ليس مجرد بناء موقع. أقدم دعمًا مستمرًا وتوجيهًا واستراتيجية رقمية كشريك موثوق.",
+          "svc.label": "خدماتنا",
+          "svc.h2a": "كيف أساعد",
+          "svc.h2b": "الكنائس والوزارات",
+          "svc.s1h": "مواقع الكنائس والوزارات",
+          "svc.s1p":
+            "مواقع حديثة ومتجاوبة مع الجوال مصممة خصيصًا للكنائس والوزارات تعكس هويتك وقيمك.",
+          "svc.s2h": "الاستضافة والدعم طويل الأمد",
+          "svc.s2p":
+            "استضافة موثوقة وصيانة وتحديثات ونسخ احتياطية ومراقبة أمنية وإرشادات تقنية.",
+          "svc.s3h": "حلول الذكاء الاصطناعي للوزارة",
+          "svc.s3p":
+            "أدوات ذكاء اصطناعي عملية تساعد الوزارات على تحسين التواصل وإدارة المحتوى والتوعية متعددة اللغات.",
+          "svc.s4h": "التطوير المخصص",
+          "svc.s4p":
+            "تطبيقات ويب مخصصة وأنظمة وزارية وتكاملات وأدوات رقمية متخصصة.",
+          "svc.s5h": "الاستراتيجية الرقمية والتوعية",
+          "svc.s5p":
+            "مساعدة الكنائس على تحسين التواصل والظهور والتوعية في عالم رقمي متغير.",
+          "svc.s6h": "دعم الوزارة متعدد اللغات",
+          "svc.s6p":
+            "خبرة عميقة في العمل مع المحتوى بالإنجليزية والعربية والعبرية.",
+          "ch.label": "التحديات الشائعة",
+          "ch.h2a": "كثير من الكنائس تواجه",
+          "ch.h2b": "تحديات رقمية",
+          "ch.c1": "مواقع لا تعكس صورة الكنيسة وتفشل في استقطاب زوار جدد",
+          "ch.c2":
+            "صعوبة الوصول إلى الأجيال الشابة عبر القنوات الرقمية الحديثة",
+          "ch.c3":
+            "محدودية الدعم التقني والتوجيه من شركاء موثوقين يفهمون الوزارة",
+          "ch.c4": "ضعف تجربة الهاتف المحمول للأعضاء والزوار",
+          "ch.c5": "إدارة أدوات رقمية وقنوات تواصل متعددة دون استراتيجية واضحة",
+          "ch.c6":
+            "عدم اليقين حول كيفية مساعدة الذكاء الاصطناعي والأدوات الحديثة للوزارة",
+          "ch.note":
+            "يجب أن تساعد التكنولوجيا الوزارات على التواصل بشكل أفضل والبقاء منظمة وتوفير الوقت والتركيز أكثر على الناس — لا أن تخلق ضغطًا وتعقيدًا إضافيًا.",
+          "why.label": "لماذا أختارني",
+          "why.h2a": "فهم الوزارة",
+          "why.h2b": "مقرون بالخبرة التقنية",
+          "why.h2c": "المتميزة",
+          "why.s1h": "لست مجرد وكالة مواقع",
+          "why.s1p":
+            "خلفيتي تجمع بين الخبرة التقنية والاستراتيجية الرقمية والانتماء الطويل للمنظمات المسيحية.",
+          "why.s2h": "9+ سنوات في NationsUniversity",
+          "why.s2p":
+            "تطوير مواقع وإدارة محتوى متعدد اللغات وتحسين محركات البحث والاستراتيجية الرقمية لجامعة مسيحية رائدة.",
+          "why.s3h": "حلول حديثة مدعومة بالذكاء الاصطناعي",
+          "why.s3p":
+            "من خلال i4s، أساعد المنظمات على بناء حلول رقمية حديثة ومستقرة ومخصصة باستخدام الذكاء الاصطناعي.",
+          "why.s4h": "الوزارة هي حياتي",
+          "why.s4p":
+            "بصفتي عضوًا في كنيسة المسيح في الناصرة وابن موريس جدعون — هذا شخصي وليس مهنيًا فحسب.",
+          "why.floater": "سنوات في NationsUniversity",
+          "testi.label": "التوصيات",
+          "testi.h2a": "ماذا يقول القادة",
+          "testi.h2b": "عن أوني",
+          "testi.t1":
+            "عرفت أوني لأكثر من 25 عامًا وعرفته دائمًا بأنه موثوق ومجتهد ومحترف ومسيحي متميز. تميز كطالب قوي ومحترف موثوق بموقف ممتاز وشخصية رفيعة.",
+          "testi.r1": "نائب الرئيس التنفيذي، جامعة بيثيل بتنيسي",
+          "testi.t2":
+            "عرفت أوني لأكثر من 12 عامًا وعملت معه 9 سنوات. أظهر أمانة ومهنية وموثوقية ومعرفة تقنية قوية. كان أصلًا مهمًا لـ NationsUniversity.",
+          "testi.r2": "مدير الاتصالات، NationsUniversity",
+          "testi.t3":
+            "وظفت أوني لإدارة حملة توعية للترويج لخدماتنا في منطقة محددة. كان محترفًا حقيقيًا وشاملًا طوال العملية بأكملها.",
+          "testi.r3": "قائد تجاري أول، Comply365",
+          "edu.label": "الخلفية",
+          "edu.h2a": "التعليم و",
+          "edu.h2b": "الخلفية الوزارية",
+          "edu.desc":
+            "أساس مبني على التميز الأكاديمي والانتماء العميق للوزارة — يجمع بين التقني والروحي لأكثر من 25 عامًا.",
+          "edu.e1h": "بكالوريوس علوم الكمبيوتر",
+          "edu.e1p": "جامعة فريد-هاردمان، تينيسي — شرف قائمة العميد",
+          "edu.e2h": "أخصائي رقمي وإنترنت أول",
+          "edu.e2p":
+            "NationsUniversity — أكثر من 9 سنوات في إدارة المواقع وتحسين محركات البحث والمحتوى متعدد اللغات",
+          "edu.e3h": "عضو كنيسة المسيح في الناصرة",
+          "edu.e3p":
+            "عضو نشط في كنيسة المسيح في الناصرة — على تواصل عميق مع حياة الوزارة",
+          "edu.e4h": "عائلة الوزارة",
+          "edu.e4p": "ابن موريس جدعون، واعظ كنيسة المسيح في الناصرة",
+          "edu.e5h": "مؤسس وكالة i4s الرقمية",
+          "edu.e5p":
+            "بناء حلول رقمية حديثة ومستقرة مدعومة بالذكاء الاصطناعي للمنظمات والوزارات والشركات",
+          "edu.e6h": "أكثر من 25 عامًا في تطوير الويب",
+          "edu.e6p":
+            "تطوير الويب والبرمجة والأنظمة الإلكترونية والتوعية الرقمية وتقنية المنظمات",
+          "cta.label": "تواصل معي",
+          "cta.h2a": "لنتحدث عن",
+          "cta.h2b": "احتياجاتك الرقمية",
+          "cta.desc":
+            "سواء كانت كنيستك تحتاج إلى موقع حديث أو توجيه تقني أو استضافة أو أدوات ذكاء اصطناعي أو دعم متعدد اللغات — سيكون لي الشرف في المساعدة.",
+          "cta.btn1": "ناقش احتياجات وزارتك",
+          "cta.btn2": "تواصل عبر واتساب",
+        },
+        he: {
+          brand: "i4s משרד",
+          "nav.about": "אודות",
+          "nav.services": "שירותים",
+          "nav.challenges": "אתגרים",
+          "nav.why": "למה אני",
+          "nav.testimonials": "המלצות",
+          "nav.cta": "בואו נדבר",
+          "hero.eyebrow": "מומחה דיגיטלי לשירות כנסייתי · נצרת, ישראל",
+          "hero.h1a": "פתרונות דיגיטליים מודרניים",
+          "hero.h1b": "לכנסיות",
+          "hero.h1c": "וקהילות נוצריות",
+          "hero.subtitle":
+            "עוזר לכנסיות ולארגונים נוצריים לבנות פלטפורמות דיגיטליות חזקות יותר באמצעות אתרים מותאמים, אירוח, כלי AI ותמיכה טכנית לטווח ארוך.",
+          "hero.m1": "25+ שנות ניסיון",
+          "hero.m2": "9+ שנים NationsUniversity",
+          "hero.m3": "מדעי המחשב FHU",
+          "hero.cta1": "דון בצרכים שלך",
+          "hero.cta2": "השירותים שלנו",
+          "hero.s1": "שנות פיתוח אתרים",
+          "hero.s2": "שפות",
+          "hero.s3": "NationsUniv",
+          "hero.role": "אסטרטג דיגיטלי לשירות כנסייתי · i4s.dev",
+          "trust.t1": "25+ שנות ניסיון",
+          "trust.t2": "NationsUniversity · 9+ שנים",
+          "trust.t3": "רקע כנסיות המשיח",
+          "trust.t4": "אנגלית · ערבית · עברית",
+          "trust.t5": "פיתוח מותאם ופתרונות AI",
+          "trust.t6": "נצרת, ישראל",
+          "intro.label": "אודות",
+          "intro.h2a": "הטכנולוגיה צריכה",
+          "intro.h2b": "לתמוך בשירות",
+          "intro.h2c": "— לא לסבך אותו",
+          "intro.p1":
+            "לאורך השנים עבדתי עם אוניברסיטאות, ארגונים, משרדים ועסקים בבניית וניהול אתרים, מערכות דיגיטליות, פלטפורמות הסברה, תוכן רב-לשוני ומעורבות מקוונת.",
+          "intro.p2":
+            "נשארתי קשור עמוק לחיי המשרד דרך כנסיית המשיח ודרך שנות עבודה עם ארגונים נוצריים ומוסדות חינוכיים.",
+          "intro.quote":
+            "המטרה שלי פשוטה: לעזור לכנסיות ולמשרדים לבנות פלטפורמות דיגיטליות מודרניות, יציבות ואמינות שמשרתות באמת את שליחותם ואנשיהם.",
+          "intro.c1h": "גישה שמעמידה את השירות ראשון",
+          "intro.c1p":
+            "כחבר בכנסיית המשיח בנצרת, השירות הכנסייתי אינו רק שוק שאני משרת — הוא חלק מחיי ורקעי.",
+          "intro.c2h": "עומק טכני של 25+ שנה",
+          "intro.c2p":
+            "מומחיות עמוקה בפיתוח אתרים, אסטרטגיה דיגיטלית, מערכות מקוונות וכלי AI מודרניים.",
+          "intro.c3h": "שליטה בשפות מרובות",
+          "intro.c3p":
+            "שפות אנגלית, ערבית ועברית — מאפשרת הסברה אמיתית מעבר לתרבויות.",
+          "intro.c4h": "שותפות לטווח ארוך",
+          "intro.c4p":
+            "לא רק בנייה חד פעמית. אני מציע תמיכה מתמשכת, הדרכה ואסטרטגיה דיגיטלית כשותף אמין.",
+          "svc.label": "השירותים שלנו",
+          "svc.h2a": "איך אני עוזר",
+          "svc.h2b": "לכנסיות ולמשרדים",
+          "svc.s1h": "אתרי כנסיות ומשרדים",
+          "svc.s1p":
+            "אתרים מודרניים ורספונסיביים המיועדים במיוחד לכנסיות ולמשרדים שמשקפים את הזהות והערכים שלכם.",
+          "svc.s2h": "אירוח ותמיכה לטווח ארוך",
+          "svc.s2p":
+            "אירוח אמין, תחזוקה, עדכונים, גיבויים, ניטור אבטחה והנחיות טכניות.",
+          "svc.s3h": "פתרונות AI למשרד",
+          "svc.s3p":
+            "כלי AI מעשיים שעוזרים למשרדים לשפר תקשורת, ניהול תוכן, הסברה רב-לשונית ומעורבות חברים.",
+          "svc.s4h": "פיתוח מותאם",
+          "svc.s4p":
+            "אפליקציות אינטרנט מותאמות, מערכות משרדיות, אינטגרציות וכלים דיגיטליים מיוחדים.",
+          "svc.s5h": "אסטרטגיה דיגיטלית והסברה",
+          "svc.s5p":
+            "עוזר לכנסיות לשפר תקשורת, נראות, הסברה ומעורבות בעולם דיגיטלי משתנה.",
+          "svc.s6h": "תמיכה משרדית רב-לשונית",
+          "svc.s6p":
+            "ניסיון עמוק בעבודה עם תוכן ויוזמות הסברה באנגלית, ערבית ועברית.",
+          "ch.label": "אתגרים נפוצים",
+          "ch.h2a": "כנסיות רבות מתמודדות עם",
+          "ch.h2b": "אתגרים דיגיטליים",
+          "ch.c1":
+            "אתרים שאינם משקפים עוד את הכנסייה היטב ונכשלים במשיכת מבקרים חדשים",
+          "ch.c2":
+            "קושי להגיע לדורות הצעירים באמצעות ערוצים דיגיטליים מודרניים",
+          "ch.c3":
+            "תמיכה טכנית ומנחה מוגבלת משותפים מהימנים המבינים את השירות הכנסייתי",
+          "ch.c4": "חוויית ניייד ירודה לחברים ולמבקרים הניגשים למשאבי הכנסייה",
+          "ch.c5": "ניהול כלים דיגיטליים וערוצי תקשורת מרובים ללא אסטרטגיה",
+          "ch.c6": "אי-ודאות לגבי אופן הסיוע המעשי של AI וכלים מודרניים לשירות",
+          "ch.note":
+            "הטכנולוגיה צריכה לעזור למשרדים לתקשר טוב יותר, להישאר מאורגנים, לחסוך זמן ולהתמקד יותר באנשים — לא ליצור לחץ ובלבול נוסף.",
+          "why.label": "למה לבחור בי",
+          "why.h2a": "הבנת השירות",
+          "why.h2b": "בשילוב מצוינות",
+          "why.h2c": "טכנית",
+          "why.s1h": "לא רק סוכנות אתרים",
+          "why.s1p":
+            "הרקע שלי משלב מומחיות טכנית, אסטרטגיה דיגיטלית ומעורבות ארוכת טווח עם ארגונים נוצריים.",
+          "why.s2h": "9+ שנים ב-NationsUniversity",
+          "why.s2p":
+            "פיתוח אתרים, ניהול תוכן רב-לשוני, SEO, ניתוח, אסטרטגיה דיגיטלית ותמיכה ביוזמות כנסייתיות וחינוכיות.",
+          "why.s3h": "פתרונות מודרניים מבוססי AI",
+          "why.s3p":
+            "דרך i4s, אני עוזר לארגונים לבנות פתרונות דיגיטליים מודרניים, יציבים ומותאמים.",
+          "why.s4h": "השירות הוא חיי",
+          "why.s4p":
+            "כחבר בכנסיית המשיח בנצרת ובנו של מוריס ג'אדון — זה אישי, לא רק מקצועי.",
+          "why.floater": "שנים ב-NationsUniversity",
+          "testi.label": "המלצות",
+          "testi.h2a": "מה מנהיגים",
+          "testi.h2b": "אומרים על אוני",
+          "testi.t1":
+            "הכרתי את אוני יותר מ-25 שנה ותמיד ידעתי שהוא אמין, חרוץ, מקצועי ונוצרי מצטיין. הוא הצטיין גם כסטודנט חזק וגם כאיש מקצוע אמין עם יחס ואופי מעולים.",
+          "testi.r1": "סגן נשיא בכיר, אוניברסיטת בת'ל טנסי",
+          "testi.t2":
+            "הכרתי את אוני יותר מ-12 שנה ועבדתי איתו 9 שנים. הוא הפגין יושרה, מקצועיות, אמינות וידע טכני חזק. הוא היה נכס חשוב ל-NationsUniversity.",
+          "testi.r2": "מנהל תקשורת, NationsUniversity",
+          "testi.t3":
+            "שכרתי את אוני לניהול קמפיין הסברה לקידום שירותינו באזור ספציפי. מעבר להיותו בן אדם נהדר, אוני היה איש מקצוע אמיתי — יסודי לאורך כל התהליך.",
+          "testi.r3": "מנהל מסחרי בכיר, Comply365",
+          "edu.label": "רקע",
+          "edu.h2a": "השכלה ו",
+          "edu.h2b": "רקע כנסייתי",
+          "edu.desc":
+            "יסוד הבנוי על מצוינות אקדמית ומעורבות כנסייתית עמוקה — גישר בין הטכני לרוחני במשך יותר מ-25 שנה.",
+          "edu.e1h": "תואר ראשון במדעי המחשב",
+          "edu.e1p": "אוניברסיטת פריד-הארדמן, טנסי — בהצטיינות ברשימת הדיקן",
+          "edu.e2h": "מומחה דיגיטלי ואינטרנט בכיר",
+          "edu.e2p":
+            "NationsUniversity — 9+ שנים בניהול אתרים, SEO, תוכן רב-לשוני ואסטרטגיה דיגיטלית",
+          "edu.e3h": "חבר בכנסיית המשיח בנצרת",
+          "edu.e3p": "חבר פעיל בכנסיית המשיח בנצרת — קשור עמוק לחיי השירות",
+          "edu.e4h": "משפחת שירות",
+          "edu.e4p":
+            "בנו של מוריס ג'אדון, מטיף בכנסיית המשיח בנצרת — השירות עובר במשפחה",
+          "edu.e5h": "מייסד סוכנות i4s הדיגיטלית",
+          "edu.e5p":
+            "בניית פתרונות דיגיטליים מודרניים, יציבים ומבוססי AI לארגונים, משרדים ועסקים",
+          "edu.e6h": "25+ שנות פיתוח אתרים",
+          "edu.e6p":
+            "פיתוח אתרים, תכנות, מערכות מקוונות, הסברה דיגיטלית וטכנולוגיית ארגונים",
+          "cta.label": "צור קשר",
+          "cta.h2a": "בואו נדבר על",
+          "cta.h2b": "הצרכים הדיגיטליים של הכנסייה שלך",
+          "cta.desc":
+            "בין אם הכנסייה שלך צריכה אתר מודרני, הדרכה טכנית, אירוח, כלי AI, תמיכה רב-לשונית או עזרה דיגיטלית לטווח ארוך — יהיה לי הכבוד לעזור.",
+          "cta.btn1": "דון בצרכי המשרד שלך",
+          "cta.btn2": "צור קשר בוואטסאפ",
+        },
+      };
+
+      /* ═══════════════════════════════════════════
+   APPLY LANGUAGE
+═══════════════════════════════════════════ */
+      let currentLang = "en";
+      function applyLang(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        if (!t) return;
+
+        // Text content
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key] !== undefined) el.textContent = t[key];
+        });
+
+        // innerHTML for keys with & entities
+        ["nav.services", "svc.h2b", "svc.s1h", "svc.s2h", "cta.h2a"].forEach(
+          (k) => {
+            document.querySelectorAll(`[data-i18n="${k}"]`).forEach((el) => {
+              if (t[k]) el.innerHTML = t[k];
+            });
+          },
+        );
+
+        // Direction
+        const isRTL = lang === "ar" || lang === "he";
+        document.documentElement.setAttribute("dir", isRTL ? "rtl" : "ltr");
+        document.documentElement.setAttribute("lang", lang);
+
+        // Active button
+        document.querySelectorAll(".lang-btn").forEach((b) => {
+          b.classList.toggle("active", b.dataset.lang === lang);
+        });
+      }
+
+      // Wire up all language buttons (both desktop and mobile)
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          applyLang(btn.dataset.lang);
+          // Sync the other switcher
+          document.querySelectorAll(".lang-btn").forEach((b) => {
+            b.classList.toggle("active", b.dataset.lang === btn.dataset.lang);
+          });
+        });
+      });
+
+      /* ═══════════════════════════════════════════
+   NAVBAR SCROLL
+═══════════════════════════════════════════ */
+      const nav = document.getElementById("mainNav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 50);
+          document
+            .getElementById("scrollTop")
+            .classList.toggle("show", window.scrollY > 300);
+        },
+        { passive: true },
+      );
+
+      /* ═══════════════════════════════════════════
+   SCROLL TO TOP
+═══════════════════════════════════════════ */
+      document
+        .getElementById("scrollTop")
+        .addEventListener("click", () =>
+          window.scrollTo({ top: 0, behavior: "smooth" }),
+        );
+
+      /* ═══════════════════════════════════════════
+   REVEAL ON SCROLL
+═══════════════════════════════════════════ */
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              revealObserver.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObserver.observe(el));
+
+      /* ═══════════════════════════════════════════
+   HERO LOAD ANIMATION
+═══════════════════════════════════════════ */
+      window.addEventListener("load", () => {
+        document.querySelectorAll("#hero .reveal").forEach((el) => {
+          // Trigger immediately for hero
+          setTimeout(() => el.classList.add("visible"), 100);
+        });
+      });
+
+      /* ═══════════════════════════════════════════
+   ACTIVE NAV HIGHLIGHT
+═══════════════════════════════════════════ */
+      const navLinks = document.querySelectorAll(
+        ".navbar-nav .nav-link:not(.btn-nav-cta)",
+      );
+      const secIds = ["intro", "services", "challenges", "why", "testimonials"];
+      const secEls = secIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          let cur = "";
+          secEls.forEach((s) => {
+            if (window.scrollY >= s.offsetTop - 160) cur = s.id;
+          });
+          navLinks.forEach((l) => {
+            const match = l.getAttribute("href") === "#" + cur;
+            l.style.color = match ? "var(--gold-pale)" : "";
+          });
+        },
+        { passive: true },
+      );
+    </script>
+  </body>
+</html>
